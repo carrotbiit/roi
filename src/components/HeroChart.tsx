@@ -72,7 +72,7 @@ export function HeroChart() {
             return (
               <g
                 key={i}
-                fill={up ? 'var(--color-brand)' : 'var(--color-bear)'}
+                fill={up ? 'var(--color-bull)' : 'var(--color-bear)'}
                 className="animate-fade"
                 style={{ animationDelay: `${0.2 + i * 0.018}s`, animationDuration: '0.5s' }}
               >
@@ -87,7 +87,7 @@ export function HeroChart() {
             y1={y(last)}
             x2={PLOT_W}
             y2={y(last)}
-            stroke="var(--color-brand)"
+            stroke="var(--color-bull)"
             strokeWidth="1"
             strokeDasharray="6 6"
             vectorEffect="non-scaling-stroke"
@@ -107,7 +107,7 @@ export function HeroChart() {
           ))}
           <span
             style={{ top: `${at(last) * 100}%` }}
-            className="absolute right-0 -translate-y-1/2 translate-x-full ml-2 bg-brand px-1.5 py-0.5 font-mono text-[10px] leading-none text-ink tabular-nums"
+            className="absolute right-0 -translate-y-1/2 translate-x-full ml-2 bg-bull px-1.5 py-0.5 font-mono text-[10px] leading-none text-ink tabular-nums"
           >
             {last.toFixed(2)}
           </span>

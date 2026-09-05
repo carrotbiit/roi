@@ -34,7 +34,7 @@ export function SiteHeader() {
             </a>
           ))}
           <a
-            href="#contact"
+            href="mailto:hello@roi-pitch.org"
             className="bg-brand px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-brand-deep hover:text-fg"
           >
             Apply
@@ -66,7 +66,7 @@ export function SiteHeader() {
               </a>
             ))}
             <a
-              href="#contact"
+              href="mailto:hello@roi-pitch.org"
               onClick={() => setOpen(false)}
               className="block py-3.5 font-medium text-brand"
             >

@@ -20,13 +20,7 @@ export const event = {
   fee: '$35 per delegate, waivers available',
 } as const
 
-export const nav = [
-  { id: 'about', label: 'About' },
-  { id: 'program', label: 'Program' },
-  { id: 'sponsor', label: 'Sponsor' },
-  { id: 'faq', label: 'FAQ' },
-  { id: 'contact', label: 'Contact' },
-] as const
+export const nav = [{ id: 'about', label: 'About' }] as const
 
 /** The three phases of the competition day, shown as a stepped list. */
 export const phases = [

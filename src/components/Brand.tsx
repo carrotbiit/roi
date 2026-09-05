@@ -1,6 +1,6 @@
 /**
  * The ROI lockup, rebuilt in markup so it stays crisp at any size and inherits
- * the surrounding font size: white R and I, violet square in place of the O.
+ * the surrounding font size: white R and I, green square in place of the O.
  */
 export function Wordmark({ className = '' }: { className?: string }) {
   return (
@@ -12,7 +12,7 @@ export function Wordmark({ className = '' }: { className?: string }) {
       <span aria-hidden="true">R</span>
       <span
         aria-hidden="true"
-        className="mx-[0.1em] inline-block aspect-square w-[0.72em] -translate-y-[0.045em] rounded-[0.16em] border-[0.13em] border-brand"
+        className="mx-[0.1em] inline-block aspect-square w-[0.72em] rounded-[0.16em] border-[0.13em] border-brand"
       />
       <span aria-hidden="true">I</span>
     </span>

@@ -1,218 +1,154 @@
 import type { ReactNode } from 'react'
 import { event, phases, rubric } from '../data/site'
-import { Section, SectionIndex } from './layout'
+import { Section } from './layout'
 
 /**
- * The essentials and the format laid out as a treemap: one bordered field of
- * tiles, grouped under sector-style labels, sized by how much each fact matters.
+ * The essentials, the format and the rubric packed into a single market-map
+ * grid: twelve columns, tiles of deliberately unequal width and height, each
+ * coloured green through red so the board reads like a treemap of a session.
  */
 
-const tone = {
-  1: 'bg-tile-1',
-  2: 'bg-tile-2',
-  3: 'bg-tile-3',
-  4: 'bg-tile-4',
-} as const
+type Heat = 'up-3' | 'up-2' | 'up-1' | 'flat' | 'down-1' | 'down-2' | 'down-3'
 
-function Group({
-  label,
-  meta,
-  className = '',
-  gridClassName,
-  children,
-}: {
-  label: string
-  meta?: string
-  className?: string
-  gridClassName: string
-  children: ReactNode
-}) {
-  return (
-    <section className={`flex flex-col gap-px bg-rule ${className}`}>
-      <h3 className="flex items-baseline justify-between gap-4 bg-surface px-3 py-2 font-mono text-[0.62rem] tracking-[0.22em] text-fg-subtle uppercase">
-        <span className="text-fg-muted">{label}</span>
-        {meta && <span>{meta}</span>}
-      </h3>
-      <div className={`grid flex-1 gap-px bg-rule ${gridClassName}`}>{children}</div>
-    </section>
-  )
+/** Static class names so Tailwind keeps every shade in the build. */
+const heat: Record<Heat, string> = {
+  'up-3': 'bg-heat-up-3',
+  'up-2': 'bg-heat-up-2',
+  'up-1': 'bg-heat-up-1',
+  flat: 'bg-heat-flat',
+  'down-1': 'bg-heat-down-1',
+  'down-2': 'bg-heat-down-2',
+  'down-3': 'bg-heat-down-3',
 }
 
 function Tile({
   label,
-  value,
-  note,
-  level = 3,
+  tone = 'flat',
+  span,
   className = '',
-  size = 'md',
+  children,
 }: {
   label: string
-  value: string
-  note?: string
-  level?: keyof typeof tone
+  tone?: Heat
+  /** Column and row span at the lg breakpoint, where the twelve-up grid kicks in. */
+  span: string
   className?: string
-  size?: 'lg' | 'md' | 'sm'
+  children: ReactNode
 }) {
-  const valueSize = size === 'lg' ? 'text-3xl sm:text-4xl' : size === 'md' ? 'text-lg' : 'text-base'
   return (
     <div
-      className={`relative flex flex-col items-center justify-center px-4 pt-9 pb-5 text-center ${tone[level]} ${className}`}
+      className={`relative flex flex-col justify-end px-4 pt-9 pb-5 ${heat[tone]} ${span} ${className}`}
     >
-      <p className="absolute top-2.5 left-4 font-mono text-[0.62rem] tracking-[0.2em] text-fg-subtle uppercase">
+      <p className="absolute top-2.5 left-4 right-4 font-mono text-[0.62rem] tracking-[0.2em] text-fg/70 uppercase">
         {label}
       </p>
-      <p className={`font-display leading-tight text-fg ${valueSize}`}>{value}</p>
-      {note && <p className="mt-1.5 text-sm text-fg-muted">{note}</p>}
+      {children}
     </div>
   )
+}
+
+/** The headline number or phrase on a tile. */
+function Value({ children, size = 'md' }: { children: ReactNode; size?: 'lg' | 'md' | 'sm' }) {
+  const scale = size === 'lg' ? 'text-3xl sm:text-4xl' : size === 'md' ? 'text-lg' : 'text-base'
+  return <p className={`font-display leading-tight text-fg ${scale}`}>{children}</p>
 }
 
 export function Mosaic() {
   return (
     <Section id="about" labelledBy="about-heading">
-      <div className="flex flex-wrap items-end justify-between gap-6">
-        <div className="max-w-xl">
-          <SectionIndex n="01" label="About" />
-          <h2 id="about-heading" className="mt-6 text-3xl md:text-4xl">
-            One case, one day, one panel to convince.
-          </h2>
-        </div>
-        <p className="max-w-sm text-sm text-fg-muted">
-          Everything a delegate needs to decide whether to enter, in one board. Larger tiles carry
-          the facts we are asked about most.
-        </p>
-      </div>
+      <h2 id="about-heading" className="text-3xl md:text-4xl">
+        About
+      </h2>
 
-      <div className="mt-10 grid auto-rows-[minmax(6.5rem,auto)] gap-px border border-rule bg-rule lg:grid-cols-12">
-        <Group
-          label="Essentials"
-          meta={event.season}
-          className="lg:col-span-7"
-          gridClassName="auto-rows-[minmax(6.5rem,auto)] grid-cols-2 sm:grid-cols-6"
-        >
-          <Tile
-            label="Date"
-            value={event.date}
-            note={event.hours}
-            level={1}
-            size="lg"
-            className="col-span-2 sm:col-span-3 sm:row-span-2"
-          />
-          <Tile
-            label="Place"
-            value={event.venue}
-            note={`${event.street}, ${event.city}`}
-            level={2}
-            className="col-span-2 sm:col-span-3"
-          />
-          <Tile
-            label="Who"
-            value={event.eligibility}
-            note="No economics coursework needed"
-            level={3}
-            className="sm:col-span-2"
-          />
-          <Tile
-            label="Teams"
-            value="Two to four"
-            note="students"
-            level={4}
-            size="sm"
-            className="sm:col-span-1"
-          />
-          <Tile
-            label="Applications close"
-            value={event.deadline}
-            level={2}
-            className="col-span-2 sm:col-span-3"
-          />
-          <Tile
-            label="Entry"
-            value="$35"
-            note="Need-based waivers granted on request"
-            level={4}
-            className="col-span-2 sm:col-span-3"
-          />
-        </Group>
+      <div className="mt-10 grid auto-rows-[minmax(5.5rem,auto)] grid-cols-1 gap-px border border-rule bg-rule sm:grid-cols-2 lg:auto-rows-[minmax(5rem,auto)] lg:grid-cols-12">
+        <Tile label="Date" tone="up-2" span="lg:col-span-5 lg:row-span-3">
+          <Value size="lg">{event.date}</Value>
+          <p className="mt-1.5 text-sm text-fg/75">{event.hours}</p>
+        </Tile>
 
-        <Group
-          label="Enter"
-          meta="Open"
-          className="lg:col-span-5"
-          gridClassName="auto-rows-[minmax(6.5rem,auto)] grid-cols-2"
+        <Tile label="Place" tone="down-2" span="lg:col-span-4 lg:row-span-2">
+          <Value>{event.venue}</Value>
+          <p className="mt-1.5 text-sm text-fg/75">
+            {event.street}, {event.city}
+          </p>
+        </Tile>
+
+        <a
+          href="mailto:hello@roi-pitch.org"
+          className="flex flex-col justify-between bg-brand p-4 text-ink transition-colors hover:bg-brand-deep hover:text-fg sm:col-span-2 lg:col-span-3 lg:row-span-4"
         >
-          <a
-            href="#contact"
-            className="col-span-2 flex flex-col justify-between bg-brand p-4 text-ink transition-colors hover:bg-brand-deep hover:text-fg"
+          <span className="font-mono text-[0.62rem] tracking-[0.2em] uppercase opacity-70">
+            Registration
+          </span>
+          <span className="mt-6 flex items-baseline justify-between gap-4">
+            <span className="font-display text-2xl leading-tight sm:text-3xl">Apply to compete</span>
+            <span aria-hidden="true" className="font-mono text-xl">
+              →
+            </span>
+          </span>
+        </a>
+
+        <Tile label="Who" tone="up-1" span="lg:col-span-4">
+          <Value>{event.eligibility}</Value>
+          <p className="mt-1.5 text-sm text-fg/75">No economics coursework needed</p>
+        </Tile>
+
+        <Tile
+          label="Background"
+          tone="flat"
+          span="sm:col-span-2 lg:col-span-5 lg:row-span-2"
+          className="justify-start"
+        >
+          <p className="text-sm text-fg/80">
+            ROI started in 2023 as forty students in a single classroom arguing about interest rates.
+            It now runs as a full day competition, and the format has not changed: nobody sees the
+            case in advance, so the day rewards clear thinking rather than rehearsal.
+          </p>
+        </Tile>
+
+        <Tile label="Applications close" tone="down-1" span="lg:col-span-4">
+          <Value>{event.deadline}</Value>
+        </Tile>
+
+        <Tile label="Entry" tone="up-1" span="lg:col-span-2">
+          <Value>$35</Value>
+          <p className="mt-1.5 text-sm text-fg/75">Waivers on request</p>
+        </Tile>
+
+        <Tile label="Teams" tone="down-3" span="lg:col-span-2">
+          <Value size="sm">Two to four</Value>
+        </Tile>
+
+        <Tile label="First held" tone="up-3" span="lg:col-span-3">
+          <Value size="sm">2023</Value>
+        </Tile>
+
+        {phases.map((phase, i) => (
+          <Tile
+            key={phase.n}
+            label={`Phase ${String(phase.n).padStart(2, '0')} / ${phase.name}`}
+            tone={i === 0 ? 'up-1' : i === 1 ? 'down-2' : 'flat'}
+            span="lg:col-span-4 lg:row-span-2"
+            className="justify-start"
           >
-            <span className="font-mono text-[0.62rem] tracking-[0.2em] uppercase opacity-70">
-              Registration
-            </span>
-            <span className="mt-6 flex items-baseline justify-between gap-4">
-              <span className="font-display text-2xl leading-tight sm:text-3xl">
-                Apply to compete
-              </span>
-              <span aria-hidden="true" className="font-mono text-xl">
-                →
-              </span>
-            </span>
-          </a>
-          <div className="relative col-span-2 bg-tile-3 px-4 pt-9 pb-5">
-            <p className="absolute top-2.5 left-4 font-mono text-[0.62rem] tracking-[0.2em] text-fg-subtle uppercase">
-              Background
-            </p>
-            <p className="text-sm text-fg-muted">
-              ROI started in 2023 as forty students in a single classroom arguing about interest
-              rates. It now runs as a full day competition, and the format has not changed: nobody
-              sees the case in advance, so the day rewards clear thinking rather than rehearsal.
-            </p>
-          </div>
-          <Tile label="First held" value="2023" level={4} size="sm" />
-          <Tile label="Alumni" value="640" note="Placeholder figure" level={4} size="sm" />
-        </Group>
+            <p className="text-sm text-fg/80">{phase.body}</p>
+          </Tile>
+        ))}
 
-        <Group
-          label="Format"
-          meta="Three phases"
-          className="lg:col-span-8"
-          gridClassName="grid-cols-1 sm:grid-cols-3"
-        >
-          {phases.map((phase, i) => (
-            <div
-              key={phase.n}
-              className={`relative px-4 pt-9 pb-5 ${i === 0 ? 'bg-tile-2' : i === 1 ? 'bg-tile-3' : 'bg-tile-4'}`}
-            >
-              <p className="absolute top-2.5 left-4 font-mono text-[0.62rem] tracking-[0.2em] text-fg-subtle uppercase">
-                <span className="text-brand">{String(phase.n).padStart(2, '0')}</span>
-                <span className="px-2">/</span>
-                {phase.name}
-              </p>
-              <p className="text-sm text-fg-muted">{phase.body}</p>
-            </div>
-          ))}
-        </Group>
+        <Tile label="Alumni" tone="down-1" span="lg:col-span-2">
+          <Value size="sm">640</Value>
+        </Tile>
 
-        <Group
-          label="Scoring"
-          meta="Weighted"
-          className="lg:col-span-4"
-          gridClassName="grid-cols-1 content-stretch"
-        >
-          <div className="flex h-full flex-col gap-px bg-rule">
-            {rubric.map((r, i) => (
-              <div
-                key={r.criterion}
-                style={{ flexGrow: r.weight }}
-                className={`flex items-baseline justify-between gap-4 p-4 ${
-                  i === 0 ? 'bg-tile-1' : i === 1 ? 'bg-tile-2' : 'bg-tile-3'
-                }`}
-              >
-                <span className="font-display text-sm text-fg sm:text-base">{r.criterion}</span>
-                <span className="font-mono text-sm text-fg-muted tabular-nums">{r.weight}%</span>
-              </div>
-            ))}
-          </div>
-        </Group>
+        {rubric.map((r, i) => (
+          <Tile
+            key={r.criterion}
+            label={`Scoring / ${r.criterion}`}
+            tone={i === 0 ? 'up-2' : i === 1 ? 'down-1' : i === 2 ? 'up-1' : 'down-2'}
+            span={i < 2 ? 'lg:col-span-3' : 'lg:col-span-2'}
+          >
+            <Value size="sm">{r.weight}%</Value>
+          </Tile>
+        ))}
       </div>
     </Section>
   )

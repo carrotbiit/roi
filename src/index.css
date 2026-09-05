@@ -1,30 +1,37 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------------------
-   Design tokens. The palette is taken from the ROI mark: white and violet on
-   true black, with a narrow neutral ramp for surfaces and rules.
+   Design tokens. The palette follows the trading floor the mark comes from:
+   white on true black with a green up / red down accent pair, over a narrow
+   neutral ramp for surfaces and rules.
    --------------------------------------------------------------------------- */
 @theme {
   --color-ink: #000000;
-  --color-surface: #0a0a0c;
-  --color-surface-2: #101015;
-  --color-rule: #1e1e24;
-  --color-rule-strong: #34343d;
+  --color-surface: #0a0c0a;
+  --color-surface-2: #101513;
+  --color-rule: #1e211f;
+  --color-rule-strong: #343a36;
 
-  --color-fg: #f4f4f6;
-  --color-fg-muted: #9c9ca7;
-  --color-fg-subtle: #67676f;
+  --color-fg: #f4f6f4;
+  --color-fg-muted: #9ca79f;
+  --color-fg-subtle: #67706a;
 
-  --color-brand: #8b5cf6;
-  --color-brand-deep: #6d3bea;
-  --color-brand-wash: #14101f;
-  --color-bear: #e2566d;
+  --color-brand: #22c55e;
+  --color-brand-deep: #15803d;
+  --color-brand-wash: #0b1a11;
+  /* Candlestick series: the conventional green up / red down pair. */
+  --color-bull: #22c55e;
+  --color-bear: #ef4444;
 
-  /* Mosaic tile ramp: violet-tinted, darkest for the least prominent cells. */
-  --color-tile-1: #34246b;
-  --color-tile-2: #241a4b;
-  --color-tile-3: #191430;
-  --color-tile-4: #101019;
+  /* Heatmap ramp, read like a market map: bright green through flat to bright
+     red. Used for the mosaic tiles and the filler cells packed around them. */
+  --color-heat-up-3: #2ecc71;
+  --color-heat-up-2: #1c8b4b;
+  --color-heat-up-1: #14472c;
+  --color-heat-flat: #262b28;
+  --color-heat-down-1: #4a2024;
+  --color-heat-down-2: #a32a30;
+  --color-heat-down-3: #ef4444;
 
   --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;

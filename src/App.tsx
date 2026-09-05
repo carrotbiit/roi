@@ -1,11 +1,7 @@
-import { Contact } from './components/Contact'
-import { Faq } from './components/Faq'
 import { Hero } from './components/Hero'
 import { Mosaic } from './components/Mosaic'
-import { HallBand, Program } from './components/Program'
 import { SiteFooter } from './components/SiteFooter'
 import { SiteHeader } from './components/SiteHeader'
-import { Sponsor } from './components/Sponsor'
 
 function App() {
   return (
@@ -20,11 +16,6 @@ function App() {
       <main id="main">
         <Hero />
         <Mosaic />
-        <HallBand />
-        <Program />
-        <Sponsor />
-        <Faq />
-        <Contact />
       </main>
       <SiteFooter />
     </>
