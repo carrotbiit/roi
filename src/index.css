@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens. The palette is taken from the ROI mark: white and violet on
+   true black, with a narrow neutral ramp for surfaces and rules.
+   --------------------------------------------------------------------------- */
+@theme {
+  --color-ink: #000000;
+  --color-surface: #0a0a0c;
+  --color-surface-2: #101015;
+  --color-rule: #1e1e24;
+  --color-rule-strong: #34343d;
+
+  --color-fg: #f4f4f6;
+  --color-fg-muted: #9c9ca7;
+  --color-fg-subtle: #67676f;
+
+  --color-brand: #8b5cf6;
+  --color-brand-deep: #6d3bea;
+  --color-brand-wash: #14101f;
+  --color-bear: #e2566d;
+
+  /* Mosaic tile ramp: violet-tinted, darkest for the least prominent cells. */
+  --color-tile-1: #34246b;
+  --color-tile-2: #241a4b;
+  --color-tile-3: #191430;
+  --color-tile-4: #101019;
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --radius-mark: 0.15em;
+
+  --animate-draw: draw 2.6s cubic-bezier(0.22, 0.61, 0.36, 1) 0.25s both;
+  --animate-rise: rise 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  --animate-fade: fade 1.6s ease-out both;
+}
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--color-brand);
+    color: #000;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

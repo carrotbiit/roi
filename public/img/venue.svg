@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="presentation">
+  <rect width="800" height="600" fill="#000000" />
+  <rect x="120" y="70" width="560" height="470" fill="#0a0a0c" stroke="#1e1e24" stroke-width="2" />
+  <g stroke="#1e1e24" stroke-width="1">
+    <path d="M120 170h560M120 270h560M120 370h560M120 470h560" />
+    <path d="M260 70v470M400 70v470M540 70v470" />
+  </g>
+  <g fill="#34343d">
+    <rect x="150" y="100" width="80" height="40" /><rect x="290" y="100" width="80" height="40" />
+    <rect x="430" y="100" width="80" height="40" /><rect x="570" y="100" width="80" height="40" />
+    <rect x="150" y="200" width="80" height="40" /><rect x="430" y="200" width="80" height="40" />
+    <rect x="570" y="200" width="80" height="40" /><rect x="290" y="300" width="80" height="40" />
+    <rect x="430" y="300" width="80" height="40" /><rect x="150" y="400" width="80" height="40" />
+    <rect x="290" y="400" width="80" height="40" /><rect x="570" y="400" width="80" height="40" />
+  </g>
+  <rect x="290" y="200" width="80" height="40" fill="#8b5cf6" opacity="0.9" />
+  <rect x="150" y="300" width="80" height="40" fill="#8b5cf6" opacity="0.35" />
+  <rect x="360" y="480" width="80" height="60" fill="#000000" stroke="#8b5cf6" stroke-width="3" />
+  <path d="M60 540h680" stroke="#1e1e24" stroke-width="2" />
+</svg>
