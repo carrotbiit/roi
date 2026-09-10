@@ -22,7 +22,7 @@ export function Section({
   children,
   className = '',
 }: {
-  id?: string
+  id: string
   labelledBy: string
   children: ReactNode
   className?: string
@@ -38,50 +38,13 @@ export function Section({
   )
 }
 
-/**
- * The heading treatment shared by every section. There is no eyebrow above it
- * on purpose: a heading that needs a label above it to explain itself has not
- * been written yet. The optional standfirst carries what a kicker would have.
- */
-export function SectionHead({
-  id,
-  title,
-  standfirst,
-  className = '',
-}: {
-  id: string
-  title: string
-  standfirst?: string
-  className?: string
-}) {
+/** Small monospace section index, e.g. "02 / Program". */
+export function SectionIndex({ n, label }: { n: string; label: string }) {
   return (
-    <div className={`max-w-2xl ${className}`}>
-      <h2 id={id} className="text-3xl md:text-4xl">
-        {title}
-      </h2>
-      {standfirst && <p className="mt-5 text-lg text-fg-muted">{standfirst}</p>}
-    </div>
-  )
-}
-
-/** The masthead of an interior route. */
-export function PageHead({
-  id,
-  title,
-  standfirst,
-}: {
-  id: string
-  title: string
-  standfirst: string
-}) {
-  return (
-    <header className="border-b border-rule py-16 md:py-24">
-      <Container>
-        <h1 id={id} className="max-w-3xl text-4xl md:text-6xl">
-          {title}
-        </h1>
-        <p className="mt-6 max-w-2xl text-lg text-fg-muted md:text-xl">{standfirst}</p>
-      </Container>
-    </header>
+    <p className="font-mono text-xs tracking-[0.28em] text-fg-subtle uppercase">
+      <span className="text-brand">{n}</span>
+      <span className="px-2">/</span>
+      {label}
+    </p>
   )
 }

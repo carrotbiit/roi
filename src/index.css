@@ -116,62 +116,6 @@
   summary::-webkit-details-marker {
     display: none;
   }
-
-  /* Browser surfaces we did not draw, themed from the palette rather than
-     shipping the platform defaults. */
-  input,
-  textarea,
-  select {
-    caret-color: var(--color-brand);
-  }
-
-  a {
-    text-underline-offset: 0.25em;
-    text-decoration-thickness: from-font;
-  }
-
-  /* Every figure, time and weight on this site is measured data, so numerals
-     align in columns wherever they stack. */
-  .font-mono,
-  time,
-  td,
-  th {
-    font-variant-numeric: tabular-nums;
-  }
-
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-rule-strong) var(--color-ink);
-  }
-
-  ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: var(--color-ink);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: var(--color-rule-strong);
-    border: 2px solid var(--color-ink);
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-fg-subtle);
-  }
-}
-
-/* The ticker rail. Two identical tracks translate as one so the loop has no
-   seam; the width is halved because the content is duplicated. */
-@keyframes ticker {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -182,9 +126,6 @@
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
-    /* Without this an infinite marquee thrashes at 0.01ms per cycle instead
-       of stopping. */
-    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
