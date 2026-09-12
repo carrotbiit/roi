@@ -74,6 +74,17 @@
   }
 }
 
+/* The market strip. Two identical passes sit side by side, so sliding exactly
+   half the row's width returns to the start with nothing to cross. */
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @keyframes fade {
   from {
     opacity: 0;

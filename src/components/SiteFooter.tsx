@@ -1,4 +1,4 @@
-import { event, nav } from '../data/site'
+import { contacts, event, nav } from '../data/site'
 import { TaglineRule, Wordmark } from './Brand'
 import { Container } from './layout'
 
@@ -13,7 +13,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-14 grid gap-10 sm:grid-cols-3">
+        <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <h2 className="font-mono text-[0.68rem] tracking-[0.24em] text-fg-subtle uppercase">
               Pages
@@ -49,6 +49,26 @@ export function SiteFooter() {
               <br />
               {event.hours}
             </p>
+          </div>
+          <div>
+            <h2 className="font-mono text-[0.68rem] tracking-[0.24em] text-fg-subtle uppercase">
+              Contact
+            </h2>
+            <ul className="mt-4 space-y-2">
+              {contacts.map((c) => (
+                <li key={c.label} className="text-sm">
+                  <a
+                    href={c.href}
+                    className="font-mono text-fg-muted transition-colors hover:text-brand"
+                  >
+                    {c.value}
+                  </a>
+                  <span className="ml-2 font-mono text-[0.6rem] tracking-[0.2em] text-fg-subtle uppercase">
+                    {c.label}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 

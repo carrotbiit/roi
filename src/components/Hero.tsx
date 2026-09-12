@@ -1,6 +1,7 @@
 import { event } from '../data/site'
 import { TaglineRule, Wordmark } from './Brand'
 import { Container } from './layout'
+import { Ticker } from './Ticker'
 
 /** Entrance timings, in the order the eye should pick things up. */
 const delay = {
@@ -60,6 +61,9 @@ export function Hero() {
           Essentials <span aria-hidden="true">↓</span>
         </a>
       </Container>
+
+      {/* Closes the first viewport: the last line of the hero is the market. */}
+      <Ticker />
     </section>
   )
 }

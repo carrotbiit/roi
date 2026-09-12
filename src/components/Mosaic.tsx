@@ -107,34 +107,17 @@ export function Mosaic() {
           accent="text-brand"
           grid="auto-rows-[minmax(7rem,auto)] lg:auto-rows-[minmax(6rem,auto)] lg:grid-cols-12"
         >
-          <Tile label="Date" tone="up-2" span="lg:col-span-5 lg:row-span-2">
+          <Tile label="Date" tone="up-2" span="lg:col-span-7 lg:row-span-2">
             <Value size="lg">{event.date}</Value>
             <Note>{event.hours}</Note>
           </Tile>
 
-          <Tile label="Place" tone="down-2" span="lg:col-span-4 lg:row-span-2">
+          <Tile label="Place" tone="down-2" span="lg:col-span-5 lg:row-span-2">
             <Value>{event.venue}</Value>
             <Note>
               {event.street}, {event.city}
             </Note>
           </Tile>
-
-          <a
-            href="mailto:hello@roi-pitch.org"
-            className="flex flex-col justify-between bg-brand px-5 py-7 text-ink transition-colors hover:bg-brand-deep hover:text-fg sm:col-span-2 lg:col-span-3 lg:row-span-2"
-          >
-            <span className="font-mono text-[0.62rem] tracking-[0.2em] uppercase opacity-70">
-              Registration
-            </span>
-            <span className="mt-8 flex items-baseline justify-between gap-4">
-              <span className="font-display text-2xl leading-tight sm:text-3xl">
-                Apply to compete
-              </span>
-              <span aria-hidden="true" className="font-mono text-xl">
-                →
-              </span>
-            </span>
-          </a>
 
           <Tile label="Who" tone="up-1" span="lg:col-span-3">
             <Value size="sm">{event.eligibility}</Value>

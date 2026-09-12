@@ -30,6 +30,7 @@ export const nav = [
   { id: 'workshops', label: 'Workshops', href: '/#workshops' },
   { id: 'team', label: 'Team', href: '/#team' },
   { id: 'sponsor', label: 'Sponsor', href: '/sponsor.html' },
+  { id: 'volunteer', label: 'Volunteer', href: '/volunteer.html' },
 ] as const
 
 /**
@@ -84,6 +85,45 @@ export const venueFacts = [
   { label: 'Parking', value: 'Underground, flat day rate' },
   { label: 'Accessibility', value: 'Step-free entry, lifts to every round' },
   { label: 'Meals', value: 'Breakfast and lunch provided' },
+] as const
+
+/**
+ * Volunteer roles on the day. Add or remove entries freely — the page is a
+ * list and takes any number of them.
+ */
+export const volunteerRoles = [
+  {
+    n: '01',
+    title: 'Room marshal',
+    commitment: 'Full day, 08:00 to 18:00',
+    body: 'Keep one breakout room on schedule: open the block, hold the clock, and make sure every team knows how long it has left.',
+  },
+  {
+    n: '02',
+    title: 'Registration desk',
+    commitment: 'Morning, 07:30 to 11:00',
+    body: 'The first face of the day. Check delegates in, hand out packs, and point people at the right room before the case is released.',
+  },
+  {
+    n: '03',
+    title: 'Judge liaison',
+    commitment: 'Afternoon, 13:00 to 18:00',
+    body: 'Look after the panel: brief judges on the rubric, collect score sheets between rounds, and keep the final running to time.',
+  },
+  {
+    n: '04',
+    title: 'Setup and pack-down',
+    commitment: 'Either end of the day',
+    body: 'Signage, seating, cabling and the hundred small things that decide whether a venue works. The shift that makes every other one possible.',
+  },
+] as const
+
+/** Practical terms, answered before anyone has to ask. */
+export const volunteerFacts = [
+  { label: 'Who', value: 'University students, teachers, alumni, 16 and over' },
+  { label: 'Training', value: 'One online briefing the week before' },
+  { label: 'Meals', value: 'Breakfast and lunch provided' },
+  { label: 'References', value: 'Reference letters on request' },
 ] as const
 
 /**
