@@ -16,12 +16,12 @@ export function SiteFooter() {
         <div className="mt-14 grid gap-10 sm:grid-cols-3">
           <div>
             <h2 className="font-mono text-[0.68rem] tracking-[0.24em] text-fg-subtle uppercase">
-              This page
+              Pages
             </h2>
             <ul className="mt-4 space-y-2">
               {nav.map((item) => (
                 <li key={item.id}>
-                  <a href={`#${item.id}`} className="text-sm text-fg-muted hover:text-fg">
+                  <a href={item.href} className="text-sm text-fg-muted hover:text-fg">
                     {item.label}
                   </a>
                 </li>

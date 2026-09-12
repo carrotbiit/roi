@@ -23,7 +23,7 @@ export function Workshops() {
             className="grid gap-x-10 gap-y-4 border-b border-rule py-8 md:grid-cols-12 md:py-10"
           >
             <div className="md:col-span-4">
-              <p className={`${meta} text-brand`}>{workshop.n}</p>
+              <p className={`${meta} text-gold`}>{workshop.n}</p>
               <p className="mt-3 font-display text-base leading-tight text-fg">{workshop.date}</p>
               <p className="mt-1 text-sm text-fg-muted">{workshop.time}</p>
             </div>
@@ -34,7 +34,7 @@ export function Workshops() {
                 {workshop.body}
               </p>
               <p className={`${meta} mt-5 text-fg-subtle`}>
-                {workshop.format}
+                <span className="text-azure">{workshop.format}</span>
                 <span className="px-2 text-rule-strong">/</span>
                 {workshop.level}
               </p>

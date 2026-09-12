@@ -18,7 +18,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-rule bg-ink/95 backdrop-blur-sm">
       <Container className="flex h-16 items-center justify-between gap-6">
-        <a href="#top" className="text-xl">
+        <a href="/#top" className="text-xl">
           <Wordmark />
           <span className="sr-only">ROI home</span>
         </a>
@@ -27,7 +27,7 @@ export function SiteHeader() {
           {nav.map((item) => (
             <a
               key={item.id}
-              href={`#${item.id}`}
+              href={item.href}
               className="text-sm text-fg-muted transition-colors hover:text-fg"
             >
               {item.label}
@@ -58,7 +58,7 @@ export function SiteHeader() {
             {nav.map((item) => (
               <a
                 key={item.id}
-                href={`#${item.id}`}
+                href={item.href}
                 onClick={() => setOpen(false)}
                 className="block border-b border-rule py-3.5 text-fg-muted last:border-b-0"
               >

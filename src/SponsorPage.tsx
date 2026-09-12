@@ -1,12 +1,10 @@
-import { Hero } from './components/Hero'
 import { MarketBackdrop } from './components/MarketBackdrop'
-import { Mosaic } from './components/Mosaic'
 import { SiteFooter } from './components/SiteFooter'
 import { SiteHeader } from './components/SiteHeader'
-import { Team } from './components/Team'
-import { Workshops } from './components/Workshops'
+import { Sponsor } from './components/Sponsor'
 
-function App() {
+/** The sponsor page: the same shell as the home page, one section inside it. */
+export function SponsorPage() {
   return (
     <>
       <a
@@ -18,14 +16,9 @@ function App() {
       <MarketBackdrop />
       <SiteHeader />
       <main id="main">
-        <Hero />
-        <Mosaic />
-        <Workshops />
-        <Team />
+        <Sponsor />
       </main>
       <SiteFooter />
     </>
   )
 }
-
-export default App

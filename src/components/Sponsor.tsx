@@ -1,13 +1,60 @@
-import { contacts, event, sponsorReasons } from '../data/site'
+import {
+  contacts,
+  event,
+  sponsorBenefits,
+  sponsorReasons,
+  sponsorTiers,
+} from '../data/site'
 import { Section } from './layout'
 
 /**
- * The sponsor pitch: why a partner would want the day, and every way to start
- * the conversation. Tiers and figures stay out of it deliberately — those go in
- * the deck, which is what this section is asking people to request.
+ * The sponsor pitch: why a partner would want the day, what the three packages
+ * hold, and every way to start the conversation. Every figure is placeholder.
  */
 
 const label = 'font-mono text-[0.68rem] tracking-[0.24em] text-fg-subtle uppercase'
+
+/**
+ * One accent per package, in the site's instrument colours: gold for the lead
+ * tier, azure for the middle, brand green for the entry. Static class strings,
+ * so Tailwind keeps all three in the build, indexed by position in the data.
+ */
+const accents = [
+  { ground: 'bg-gold-wash', mark: 'text-gold', name: 'text-gold', chip: 'bg-gold text-ink' },
+  { ground: 'bg-azure-wash', mark: 'text-azure', name: 'text-azure', chip: 'bg-azure text-ink' },
+  { ground: 'bg-brand-wash', mark: 'text-brand', name: 'text-brand', chip: 'bg-brand text-ink' },
+]
+
+/**
+ * One line of a package: included, or not. The mark carries the tier's colour,
+ * but never alone — the glyph, the text weight and the reader-only line all say
+ * the same thing.
+ */
+function Line({
+  benefit,
+  yes,
+  tier,
+  mark,
+}: {
+  benefit: string
+  yes: boolean
+  tier: string
+  mark: string
+}) {
+  return (
+    <li className="flex gap-3 border-b border-rule/60 py-3 last:border-b-0">
+      <span aria-hidden="true" className={`mt-px ${yes ? mark : 'text-fg-muted/60'}`}>
+        {yes ? '■' : '–'}
+      </span>
+      <span className={`text-sm leading-relaxed ${yes ? 'text-fg/80' : 'text-fg-muted/70'}`}>
+        {benefit}
+      </span>
+      <span className="sr-only">
+        {yes ? 'included' : 'not included'} at the {tier} tier
+      </span>
+    </li>
+  )
+}
 
 export function Sponsor() {
   return (
@@ -34,6 +81,53 @@ export function Sponsor() {
           </li>
         ))}
       </ul>
+
+      <div className="mt-16 border-t border-rule pt-10 md:mt-20">
+        <h3 className={label}>Packages</h3>
+        <ul className="mt-8 grid gap-px border border-rule bg-rule lg:grid-cols-3">
+          {sponsorTiers.map((tier, i) => {
+            const accent = accents[i] ?? accents[accents.length - 1]
+            return (
+              <li key={tier.tier} className={`flex flex-col p-6 ${accent.ground}`}>
+                <div className="flex items-baseline justify-between gap-4">
+                  <h4 className={`font-display text-xl leading-tight ${accent.name}`}>
+                    {tier.tier}
+                  </h4>
+                  {tier.lead && (
+                    <span
+                      className={`px-2 py-0.5 font-mono text-[0.6rem] tracking-[0.2em] uppercase ${accent.chip}`}
+                    >
+                      Lead
+                    </span>
+                  )}
+                </div>
+                <p className="mt-4 font-display text-3xl leading-none text-fg tabular-nums">
+                  {tier.amount}
+                </p>
+                <p className="mt-2 font-mono text-[0.62rem] tracking-[0.2em] text-fg-muted uppercase">
+                  {tier.slots}
+                </p>
+
+                <ul className="mt-6 border-t border-rule/60">
+                  {sponsorBenefits.map((benefit) => (
+                    <Line
+                      key={benefit}
+                      benefit={benefit}
+                      tier={tier.tier}
+                      mark={accent.mark}
+                      yes={tier.benefits[benefit as keyof typeof tier.benefits]}
+                    />
+                  ))}
+                </ul>
+              </li>
+            )
+          })}
+        </ul>
+        <p className="mt-6 text-sm text-fg-muted">
+          Placeholder figures. The deck carries the current tiers, delegate demographics and last
+          year's report.
+        </p>
+      </div>
 
       <div className="mt-16 grid gap-10 border-t border-rule pt-10 md:grid-cols-12 md:mt-20">
         <div className="min-w-0 md:col-span-5">

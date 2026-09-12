@@ -45,7 +45,7 @@ export function Team() {
             </div>
 
             <p className="mt-4 font-display text-base leading-tight text-fg">{member.name}</p>
-            <p className="mt-1 font-mono text-[0.62rem] tracking-[0.2em] text-brand uppercase">
+            <p className="mt-1 font-mono text-[0.62rem] tracking-[0.2em] text-azure uppercase">
               {member.role}
             </p>
             <p className="mt-2 text-sm leading-relaxed text-fg/70">{member.note}</p>

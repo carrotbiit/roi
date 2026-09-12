@@ -22,13 +22,16 @@ const heat: Record<Heat, string> = {
   'down-3': 'bg-heat-down-3',
 }
 
-/** A titled panel of tiles, with its own rule. */
+/** A titled panel of tiles, with its own rule and instrument colour. */
 function Board({
   label,
+  accent,
   grid,
   children,
 }: {
   label: string
+  /** Static colour class: green acts, azure is format, gold is time. */
+  accent: string
   /** Grid template for this panel at the lg breakpoint. */
   grid: string
   children: ReactNode
@@ -36,7 +39,7 @@ function Board({
   return (
     <div className="mt-16 first:mt-0 md:mt-20">
       <div className="border-b border-rule pb-4">
-        <p className="font-mono text-[0.7rem] tracking-[0.24em] text-brand uppercase">{label}</p>
+        <p className={`font-mono text-[0.7rem] tracking-[0.24em] uppercase ${accent}`}>{label}</p>
       </div>
       <div
         className={`mt-6 grid grid-cols-1 gap-px border border-rule bg-rule sm:grid-cols-2 ${grid}`}
@@ -101,6 +104,7 @@ export function Mosaic() {
       <div className="mt-12 md:mt-16">
         <Board
           label="General"
+          accent="text-brand"
           grid="auto-rows-[minmax(7rem,auto)] lg:auto-rows-[minmax(6rem,auto)] lg:grid-cols-12"
         >
           <Tile label="Date" tone="up-2" span="lg:col-span-5 lg:row-span-2">
@@ -151,7 +155,7 @@ export function Mosaic() {
           </Tile>
         </Board>
 
-        <Board label="Format" grid="auto-rows-[minmax(12rem,auto)] lg:grid-cols-3">
+        <Board label="Format" accent="text-azure" grid="auto-rows-[minmax(12rem,auto)] lg:grid-cols-3">
           {phases.map((phase, i) => (
             <Tile
               key={phase.n}
@@ -167,6 +171,7 @@ export function Mosaic() {
 
         <Board
           label="Judging"
+          accent="text-gold"
           grid="auto-rows-[minmax(7rem,auto)] lg:auto-rows-[minmax(6.5rem,auto)] lg:grid-cols-12"
         >
           {rubric.map((r, i) => (

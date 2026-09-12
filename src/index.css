@@ -23,6 +23,16 @@
   --color-bull: #22c55e;
   --color-bear: #ef4444;
 
+  /* Instrument accents. Colour names the kind of fact being read, the way a
+     terminal colours asset classes: green acts, gold is time and scarcity,
+     azure is place and format, red is the downside. Chosen in OKLCH at a
+     matched lightness (0.79 to 0.80) so no accent shouts over another, and
+     each carries a near-black wash for use as a card ground. */
+  --color-gold: #f0b131; /* oklch(0.80 0.152 80) */
+  --color-gold-wash: #1e1403;
+  --color-azure: #5bcaf2; /* oklch(0.79 0.115 225) */
+  --color-azure-wash: #021922;
+
   /* Heatmap ramp, read like a market map: bright green through flat to bright
      red. Used for the mosaic tiles and the filler cells packed around them. */
   --color-heat-up-3: #2ecc71;
@@ -77,10 +87,16 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
+    /* The surfaces the page does not draw: scrollbars, form controls, the
+       caret. Left alone they ship browser grey into a black room. */
+    color-scheme: dark;
+    scrollbar-color: var(--color-rule-strong) var(--color-ink);
   }
 
   body {
     background-color: var(--color-ink);
+    caret-color: var(--color-brand);
+    accent-color: var(--color-brand);
     color: var(--color-fg);
     font-family: var(--font-sans);
     font-size: 1rem;
