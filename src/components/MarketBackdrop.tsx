@@ -1,44 +1,47 @@
+import { useEffect, useRef } from 'react'
+
 /**
- * Hero backdrop: a Japanese candlestick chart with a price scale on the right
- * and the competition day along the bottom. The series is fixed sample data,
- * not live prices, and is decorative only.
+ * Site backdrop: a candlestick series fixed behind every section, crawling
+ * left. The price is an Ornstein–Uhlenbeck walk — it wanders but is always
+ * pulled back to the base, so it stays inside the plot and the scale never has
+ * to move. Invented data, decorative only.
+ *
+ * Nothing here is stepped. The price advances every frame, the candle at the
+ * right edge grows with it — open fixed, close tracking the price, wick
+ * stretching to each new extreme — and the whole series translates by a
+ * fraction of a column per frame, so the crawl is continuous. React renders the
+ * rects once; the loop writes attributes straight to the DOM.
  */
 
-type Candle = [open: number, high: number, low: number, close: number]
+type Candle = { o: number; h: number; l: number; c: number }
 
-const CANDLES: Candle[] = [
-  [132.0, 132.04, 131.43, 131.8], [131.8, 132.54, 131.15, 131.61], [131.61, 132.75, 131.46, 132.5], [132.5, 132.84, 132.0, 132.57],
-  [132.57, 134.18, 132.54, 133.9], [133.9, 134.61, 133.3, 133.85], [133.85, 135.31, 133.64, 134.62], [134.62, 135.58, 133.9, 134.88],
-  [134.88, 136.01, 134.18, 135.72], [135.72, 136.13, 134.95, 135.72], [135.72, 136.48, 135.08, 135.86], [135.86, 137.25, 135.28, 136.76],
-  [136.76, 138.78, 136.28, 138.09], [138.09, 140.03, 137.63, 139.25], [139.25, 140.2, 138.74, 140.19], [140.19, 140.96, 139.65, 140.58],
-  [140.58, 141.05, 139.84, 140.62], [140.62, 141.89, 139.8, 141.44], [141.44, 142.26, 141.15, 141.82], [141.82, 142.49, 141.51, 141.81],
-  [141.81, 142.87, 141.41, 142.77], [142.77, 143.27, 142.54, 143.25], [143.25, 144.07, 143.14, 143.36], [143.36, 143.41, 142.62, 142.84],
-  [142.84, 143.55, 142.01, 143.1], [143.1, 143.54, 142.59, 143.14], [143.14, 143.43, 141.82, 142.57], [142.57, 143.51, 142.34, 142.85],
-  [142.85, 143.36, 141.47, 142.23], [142.23, 143.41, 141.86, 142.58], [142.58, 143.19, 141.68, 142.03], [142.03, 142.69, 141.72, 142.16],
-  [142.16, 143.14, 141.49, 142.59], [142.59, 144.03, 142.03, 143.28], [143.28, 143.57, 141.77, 141.91], [141.91, 142.58, 140.04, 140.75],
-  [140.75, 141.07, 138.59, 139.17], [139.17, 139.91, 138.14, 138.75], [138.75, 139.24, 137.92, 138.04], [138.04, 138.32, 136.17, 136.77],
-  [136.77, 137.26, 135.09, 135.42], [135.42, 136.07, 133.8, 134.37], [134.37, 134.85, 132.36, 133.07], [133.07, 133.75, 132.48, 133.41],
-  [133.41, 134.12, 132.83, 133.82], [133.82, 135.81, 133.6, 135.12], [135.12, 136.69, 134.6, 136.26], [136.26, 137.24, 135.61, 136.82],
-  [136.82, 137.23, 136.39, 137.13], [137.13, 138.22, 137.08, 137.61], [137.61, 139.02, 137.24, 138.28], [138.28, 138.74, 137.72, 138.52],
-  [138.52, 139.48, 137.92, 139.17], [139.17, 139.66, 138.54, 139.04], [139.04, 139.72, 138.58, 138.82], [138.82, 139.0, 138.09, 138.82],
-  [138.82, 139.96, 138.39, 139.89], [139.89, 141.14, 139.34, 140.31], [140.31, 140.32, 139.85, 140.09], [140.09, 140.75, 139.06, 139.81],
-  [139.81, 140.02, 139.35, 140.01], [140.01, 140.49, 139.39, 140.45], [140.45, 140.69, 139.48, 140.27], [140.27, 141.69, 139.75, 140.85],
-]
-
-const HOURS = ['08:30', '10:00', '12:00', '14:00', '16:00', '18:00']
+/** Columns across the plot. One more is drawn just off the left edge. */
+const VISIBLE = 64
+const COUNT = VISIBLE + 1
 
 const STEP = 10
-const BODY = 6.4
-const WICK = 1.3
+const BODY = 6.2
+const WICK = 1.2
+const PLOT_W = VISIBLE * STEP
 const PLOT_H = 1000
-const PLOT_W = CANDLES.length * STEP
-const TICK = 4
 
-const headroom = 0.06
-const high = Math.max(...CANDLES.map((c) => c[1]))
-const low = Math.min(...CANDLES.map((c) => c[2]))
-const top = high + (high - low) * headroom
-const bottom = low - (high - low) * headroom
+/** How long a candle takes to form. The series crosses in VISIBLE × this. */
+const CANDLE_MS = 1900
+/**
+ * The walk only moves on a tick — four per candle — and the drawn price eases
+ * toward the last tick over EASE_MS. So the forming candle glides between a
+ * handful of levels instead of trembling on every frame, which is both slower
+ * and much quieter at the right edge.
+ */
+const TICK_MS = CANDLE_MS / 4
+const EASE_MS = 420
+
+const BASE = 140
+/** The walk is held inside this band, so the price scale never has to rescale. */
+const BAND = 13
+const TICK = 5
+const top = BASE + BAND + 4
+const bottom = BASE - BAND - 4
 
 /** Price to a 0–1 position from the top of the plot. */
 const at = (price: number) => (top - price) / (top - bottom)
@@ -47,16 +50,161 @@ const y = (price: number) => at(price) * PLOT_H
 const ticks: number[] = []
 for (let t = Math.ceil(bottom / TICK) * TICK; t < top; t += TICK) ticks.push(t)
 
-const last = CANDLES[CANDLES.length - 1][3]
+/** Roughly normal, from three uniforms: most steps small, the odd one sharp. */
+const gauss = () => Math.random() + Math.random() + Math.random() - 1.5
 
-export function HeroChart() {
+/**
+ * Mean reversion and volatility, both per candle. Volatility sets how tall a
+ * typical body is: at this level the median candle is a few percent of the plot
+ * and the walk wanders over roughly half of it, which is enough to read as a
+ * chart through the scrim without ever reaching the band.
+ */
+const PULL = 0.03
+const VOL = 3
+
+/**
+ * One step of the walk over `k` candles' worth of time. Noise scales with the
+ * square root, so the series has the same character however long a frame ran.
+ *
+ * `k` is clamped before the square root, and a non-finite result falls back to
+ * the base price: a single NaN here would otherwise flow into the live candle
+ * and, one close at a time, poison every candle in the series.
+ */
+function advance(price: number, k: number): number {
+  const step = Math.max(k, 0)
+  const v = price + (BASE - price) * PULL * step + gauss() * VOL * Math.sqrt(step)
+  if (!Number.isFinite(v)) return BASE
+  return Math.min(BASE + BAND, Math.max(BASE - BAND, v))
+}
+
+/** A closed series, burnt in past the visible window so it opens mid-trend. */
+function seed(): { candles: Candle[]; price: number } {
+  let price = BASE
+  const candles: Candle[] = []
+  for (let i = 0; i < COUNT + 200; i++) {
+    const o = price
+    let h = o
+    let l = o
+    /* Four intra-candle samples: enough for wicks that overshoot the body. */
+    for (let s = 0; s < 4; s++) {
+      price = advance(price, 0.25)
+      h = Math.max(h, price)
+      l = Math.min(l, price)
+    }
+    candles.push({ o, h, l, c: price })
+  }
+  return { candles: candles.slice(-COUNT), price }
+}
+
+export function MarketBackdrop() {
+  const wicks = useRef<(SVGRectElement | null)[]>([])
+  const bodies = useRef<(SVGRectElement | null)[]>([])
+  const crawl = useRef<SVGGElement>(null)
+  const marker = useRef<HTMLDivElement>(null)
+  const tag = useRef<HTMLSpanElement>(null)
+
+  useEffect(() => {
+    const { candles, price: opening } = seed()
+    /** Where the walk has got to, and the eased price actually drawn. */
+    let target = opening
+    let price = opening
+
+    /** Draw column i from its candle. */
+    const paint = (i: number) => {
+      const { o, h, l, c } = candles[i]
+      const wick = wicks.current[i]
+      const body = bodies.current[i]
+      if (!wick || !body) return
+      if (!Number.isFinite(o + h + l + c)) return
+      const fill = c >= o ? 'var(--color-bull)' : 'var(--color-bear)'
+      const bodyTop = y(Math.max(o, c))
+      wick.setAttribute('y', `${y(h)}`)
+      wick.setAttribute('height', `${Math.max(y(l) - y(h), 1)}`)
+      wick.setAttribute('fill', fill)
+      body.setAttribute('y', `${bodyTop}`)
+      body.setAttribute('height', `${Math.max(y(Math.min(o, c)) - bodyTop, 2)}`)
+      body.setAttribute('fill', fill)
+    }
+
+    const paintAll = () => {
+      for (let i = 0; i < COUNT; i++) paint(i)
+    }
+
+    /**
+     * The live price rule, dot and badge at the right edge. The rule glides
+     * every frame; the badge only reprints a few times a second, since digits
+     * flickering at 60fps pull the eye away from the copy in front.
+     */
+    let printed = 0
+    const mark = (now: number) => {
+      if (marker.current) marker.current.style.top = `${at(price) * 100}%`
+      if (tag.current && now - printed > 250) {
+        printed = now
+        tag.current.textContent = price.toFixed(2)
+      }
+    }
+
+    paintAll()
+    mark(performance.now())
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    let raf = 0
+    let last = performance.now()
+    let elapsed = 0
+    let sinceTick = 0
+
+    const frame = (now: number) => {
+      /* Clamp the delta: a backgrounded tab resumes rather than fast-forwards,
+         and a frame timestamp older than the clock read at setup — which some
+         browsers hand out on the first callback — cannot run the walk
+         backwards. */
+      const dt = Math.min(Math.max(now - last, 0), CANDLE_MS)
+      last = now
+      elapsed += dt
+      sinceTick += dt
+
+      while (sinceTick >= TICK_MS) {
+        sinceTick -= TICK_MS
+        target = advance(target, TICK_MS / CANDLE_MS)
+      }
+      /* Exponential ease, written against elapsed time rather than a fixed
+         fraction, so the glide is identical at any frame rate. */
+      price += (target - price) * (1 - Math.exp(-dt / EASE_MS))
+
+      const live = candles[COUNT - 1]
+      live.c = price
+      live.h = Math.max(live.h, price)
+      live.l = Math.min(live.l, price)
+
+      if (elapsed >= CANDLE_MS) {
+        elapsed -= CANDLE_MS
+        candles.shift()
+        candles.push({ o: price, h: price, l: price, c: price })
+        paintAll()
+      } else {
+        paint(COUNT - 1)
+      }
+
+      /* A fraction of a column of crawl, reset by the shift above. */
+      const slide = -(elapsed / CANDLE_MS) * STEP
+      if (crawl.current) crawl.current.style.transform = `translateX(${slide}px)`
+      mark(now)
+
+      raf = requestAnimationFrame(frame)
+    }
+
+    raf = requestAnimationFrame(frame)
+    return () => cancelAnimationFrame(raf)
+  }, [])
+
   return (
-    <div aria-hidden="true" className="absolute top-0 right-0 bottom-16 left-0 -z-10 overflow-hidden">
-      <div className="absolute top-0 right-0 bottom-0 left-0 sm:right-14 sm:bottom-9">
+    <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+      <div className="absolute inset-0 sm:right-14 sm:bottom-9">
         <svg
           viewBox={`0 0 ${PLOT_W} ${PLOT_H}`}
           preserveAspectRatio="none"
-          className="h-full w-full opacity-85"
+          className="animate-fade h-full w-full"
         >
           <g stroke="var(--color-rule)" strokeWidth="1" vectorEffect="non-scaling-stroke">
             {ticks.map((t) => (
@@ -64,64 +212,59 @@ export function HeroChart() {
             ))}
           </g>
 
-          {CANDLES.map(([o, h, l, c], i) => {
-            const up = c >= o
-            const x = i * STEP + STEP / 2
-            const bodyTop = y(Math.max(o, c))
-            const bodyHeight = Math.max(y(Math.min(o, c)) - bodyTop, 2)
-            return (
-              <g
-                key={i}
-                fill={up ? 'var(--color-bull)' : 'var(--color-bear)'}
-                className="animate-fade"
-                style={{ animationDelay: `${0.2 + i * 0.018}s`, animationDuration: '0.5s' }}
-              >
-                <rect x={x - WICK / 2} y={y(h)} width={WICK} height={y(l) - y(h)} />
-                <rect x={x - BODY / 2} y={bodyTop} width={BODY} height={bodyHeight} />
-              </g>
-            )
-          })}
-
-          <line
-            x1="0"
-            y1={y(last)}
-            x2={PLOT_W}
-            y2={y(last)}
-            stroke="var(--color-bull)"
-            strokeWidth="1"
-            strokeDasharray="6 6"
-            vectorEffect="non-scaling-stroke"
-            className="animate-fade [animation-delay:1.5s]"
-          />
+          {/* Column i sits one step left of its index, so the forming candle
+              lands fully inside the right edge rather than half off it. */}
+          <g ref={crawl} opacity="0.9">
+            {Array.from({ length: COUNT }, (_, i) => {
+              const x = (i - 1) * STEP + STEP / 2
+              return (
+                <g key={i}>
+                  <rect
+                    ref={(el) => {
+                      wicks.current[i] = el
+                    }}
+                    x={x - WICK / 2}
+                    width={WICK}
+                  />
+                  <rect
+                    ref={(el) => {
+                      bodies.current[i] = el
+                    }}
+                    x={x - BODY / 2}
+                    width={BODY}
+                  />
+                </g>
+              )
+            })}
+          </g>
         </svg>
 
-        <div className="animate-fade hidden [animation-delay:1.4s] sm:block">
+        {/* The right edge: the live price, its rule and its badge. */}
+        <div ref={marker} className="animate-fade absolute inset-x-0 [animation-delay:0.9s]">
+          <div className="h-px w-full bg-bull/20" />
+          <div className="absolute top-0 right-0 size-1.5 -translate-y-1/2 translate-x-1/2 rounded-full bg-bull/80" />
+          <span
+            ref={tag}
+            className="absolute top-0 right-0 ml-3 hidden -translate-y-1/2 translate-x-full bg-bull/90 px-1.5 py-0.5 font-mono text-[10px] leading-none text-ink tabular-nums sm:block"
+          />
+        </div>
+
+        <div className="animate-fade hidden [animation-delay:1.1s] sm:block">
           {ticks.map((t) => (
             <span
               key={t}
               style={{ top: `${at(t) * 100}%` }}
-              className="absolute right-0 -translate-y-1/2 translate-x-full pl-2 font-mono text-[10px] leading-none text-fg-subtle tabular-nums"
+              className="absolute right-0 -translate-y-1/2 translate-x-full pl-3 font-mono text-[10px] leading-none text-fg-subtle tabular-nums"
             >
               {t.toFixed(2)}
             </span>
           ))}
-          <span
-            style={{ top: `${at(last) * 100}%` }}
-            className="absolute right-0 -translate-y-1/2 translate-x-full ml-2 bg-bull px-1.5 py-0.5 font-mono text-[10px] leading-none text-ink tabular-nums"
-          >
-            {last.toFixed(2)}
-          </span>
-          {HOURS.map((h, i) => (
-            <span
-              key={h}
-              style={{ left: `${(i / (HOURS.length - 1)) * 100}%` }}
-              className="absolute bottom-0 translate-y-6 -translate-x-1/2 font-mono text-[10px] leading-none text-fg-subtle tabular-nums"
-            >
-              {h}
-            </span>
-          ))}
         </div>
       </div>
+
+      {/* One flat scrim, so the series sits at the same weight everywhere
+          rather than fading across the page. */}
+      <div className="absolute inset-0 bg-ink/80" />
     </div>
   )
 }

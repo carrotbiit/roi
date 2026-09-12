@@ -1,6 +1,5 @@
 import { event } from '../data/site'
 import { TaglineRule, Wordmark } from './Brand'
-import { HeroChart } from './HeroChart'
 import { Container } from './layout'
 
 /** Entrance timings, in the order the eye should pick things up. */
@@ -13,20 +12,7 @@ const delay = {
 
 export function Hero() {
   return (
-    <section
-      id="top"
-      className="relative isolate flex min-h-[calc(100svh-4rem)] flex-col overflow-hidden"
-    >
-      <HeroChart />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-gradient-to-r from-ink via-ink/80 to-ink/30"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 top-0 -z-10 h-32 bg-gradient-to-b from-ink to-transparent"
-      />
-
+    <section id="top" className="relative flex min-h-[calc(100svh-4rem)] flex-col">
       <Container className="flex flex-1 flex-col items-center justify-center py-16 text-center md:py-20">
         <div className="animate-rise w-full max-w-xl" style={{ animationDelay: delay.mark }}>
           <Wordmark className="text-[clamp(4.5rem,15vw,8.5rem)] tracking-[0.01em]" />
@@ -53,7 +39,7 @@ export function Hero() {
             Apply to compete
           </a>
           <a
-            href="mailto:partners@roi-pitch.org"
+            href="#sponsor"
             className="border-b border-rule-strong pb-1 text-fg-muted transition-colors hover:border-brand hover:text-fg"
           >
             Sponsor the event

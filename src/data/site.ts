@@ -20,7 +20,22 @@ export const event = {
   fee: '$35 per delegate, waivers available',
 } as const
 
-export const nav = [{ id: 'about', label: 'About' }] as const
+export const nav = [
+  { id: 'about', label: 'About' },
+  { id: 'workshops', label: 'Workshops' },
+  { id: 'team', label: 'Team' },
+  { id: 'sponsor', label: 'Sponsor' },
+] as const
+
+/**
+ * The organising team. `photo` is a path under /public; leave it empty and the
+ * card falls back to a lettered placeholder.
+ */
+export const team = [
+  { name: 'First Last', role: 'Director', note: 'Grade 12, economics', photo: '' },
+  { name: 'First Last', role: 'Head of judging', note: 'Grade 12, mathematics', photo: '' },
+  { name: 'First Last', role: 'Partnerships', note: 'Grade 11, business', photo: '' },
+] as const
 
 /** The three phases of the competition day, shown as a stepped list. */
 export const phases = [
@@ -64,6 +79,64 @@ export const venueFacts = [
   { label: 'Parking', value: 'Underground, flat day rate' },
   { label: 'Accessibility', value: 'Step-free entry, lifts to every round' },
   { label: 'Meals', value: 'Breakfast and lunch provided' },
+] as const
+
+/**
+ * Optional sessions in the run-up to the competition. Add or remove entries
+ * freely — the section is a list and takes any number of them.
+ */
+export const workshops = [
+  {
+    n: '01',
+    title: 'Reading an economy',
+    date: 'Saturday 7 March 2026',
+    time: '10:00 to 12:00',
+    format: 'Online',
+    level: 'No background needed',
+    body: 'The handful of indicators every case turns on: output, prices, employment and the balance of payments. We take one real economy apart and put it back together, and you leave able to read a data appendix without panicking.',
+  },
+  {
+    n: '02',
+    title: 'Building the argument',
+    date: 'Saturday 21 March 2026',
+    time: '10:00 to 13:00',
+    format: 'Online',
+    level: 'Some economics helpful',
+    body: 'How a position gets built in four hours: framing the question, choosing the evidence that carries weight, and deciding what to leave out. Teams work a retired case and compare their structure against the pitch that won it.',
+  },
+  {
+    n: '03',
+    title: 'Pitching and cross-examination',
+    date: 'Saturday 4 April 2026',
+    time: '10:00 to 13:00',
+    format: 'In person, The Exchange Auditorium',
+    level: 'Registered delegates',
+    body: 'Eight minutes in front of a panel, then seven answering for it. Former judges run mock cross-examinations, and every team gets their rubric marked up line by line before the day itself.',
+  },
+] as const
+
+/** The case for partnering, four panels wide. */
+export const sponsorReasons = [
+  {
+    n: '01',
+    title: 'A room that opted in',
+    body: 'Three hundred delegates give up a Saturday to argue about monetary policy, and their teachers and families come with them. Your mark sits on the materials they take home.',
+  },
+  {
+    n: '02',
+    title: 'Time on the floor',
+    body: 'Partners take a table for the day and a seat on the judging panel. Your team meets delegates over a case rather than across a careers fair.',
+  },
+  {
+    n: '03',
+    title: 'No barriers at the door',
+    body: 'Sponsorship covers the venue, meals and every fee waiver requested, so cost never decides which students compete.',
+  },
+  {
+    n: '04',
+    title: 'A report afterwards',
+    body: 'Delegate numbers, schools represented and what the judges saw, sent to every partner within three weeks of the final.',
+  },
 ] as const
 
 export const sponsorTiers = [
