@@ -29,7 +29,6 @@ export function Program() {
           <h2 id="program-heading" className="mt-6 text-3xl md:text-4xl">
             {event.date}
           </h2>
-          <p className="mt-4 font-display text-lg text-brand">{event.hours}</p>
           <p className="mt-6 text-fg-muted">
             Doors open at half past eight and awards finish by six. Timings
             below are provisional and will be confirmed to registered delegates

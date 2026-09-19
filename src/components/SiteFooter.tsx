@@ -46,8 +46,6 @@ export function SiteFooter() {
             </h2>
             <p className="mt-4 text-sm text-fg-muted">
               <time dateTime={event.dateISO}>{event.date}</time>
-              <br />
-              {event.hours}
             </p>
           </div>
           <div>

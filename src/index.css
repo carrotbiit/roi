@@ -33,16 +33,6 @@
   --color-azure: #5bcaf2; /* oklch(0.79 0.115 225) */
   --color-azure-wash: #021922;
 
-  /* Heatmap ramp, read like a market map: bright green through flat to bright
-     red. Used for the mosaic tiles and the filler cells packed around them. */
-  --color-heat-up-3: #2ecc71;
-  --color-heat-up-2: #1c8b4b;
-  --color-heat-up-1: #14472c;
-  --color-heat-flat: #262b28;
-  --color-heat-down-1: #4a2024;
-  --color-heat-down-2: #a32a30;
-  --color-heat-down-3: #ef4444;
-
   --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
