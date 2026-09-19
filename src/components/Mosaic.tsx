@@ -31,7 +31,21 @@ function Panel({
   )
 }
 
-/** One essential: a monospace label over the fact it names. */
+/**
+ * Instrument accents, as static pairs so Tailwind keeps every colour in the
+ * build: gold is time, azure is place, green is who and how many.
+ */
+const accents = {
+  time: { text: 'text-gold', bar: 'bg-gold' },
+  place: { text: 'text-azure', bar: 'bg-azure' },
+  act: { text: 'text-brand', bar: 'bg-brand' },
+}
+
+/**
+ * One essential: a monospace label over the fact it names. On hover the ground
+ * lifts off black and the accent rule draws across the top edge, left to right,
+ * the way the hero mark draws itself.
+ */
 function Fact({
   label,
   accent,
@@ -39,14 +53,21 @@ function Fact({
   note,
 }: {
   label: string
-  accent: string
+  accent: keyof typeof accents
   value: string
   note?: string
 }) {
+  const tone = accents[accent]
   return (
-    <div className="flex flex-col bg-ink p-6">
-      <dt className={`${meta} ${accent}`}>{label}</dt>
-      <dd className="mt-6">
+    <div className="group relative flex flex-col overflow-hidden bg-ink p-6 transition-colors duration-300 ease-out hover:bg-surface-2">
+      <span
+        aria-hidden="true"
+        className={`absolute inset-x-0 top-0 h-px origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100 ${tone.bar}`}
+      />
+      <dt className={`font-mono text-sm tracking-[0.18em] uppercase md:text-base ${tone.text}`}>
+        {label}
+      </dt>
+      <dd className="mt-6 transition-transform duration-300 ease-out group-hover:-translate-y-0.5">
         <span className="block font-display text-lg leading-tight text-fg">{value}</span>
         {note && <span className="mt-2 block text-sm leading-relaxed text-fg/70">{note}</span>}
       </dd>
@@ -80,22 +101,17 @@ export function Mosaic() {
       <div className="mt-12 md:mt-16">
         <Panel label="Essentials" accent="text-brand">
           <dl className="mt-8 grid gap-px border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-3">
-            <Fact label="Date" accent="text-gold" value={event.date} />
+            <Fact label="Date" accent="time" value={event.date} />
             <Fact
               label="Place"
-              accent="text-azure"
+              accent="place"
               value={event.venue}
               note={`${event.street}, ${event.city}`}
             />
-            <Fact
-              label="Who"
-              accent="text-brand"
-              value={event.eligibility}
-              note="No experience needed"
-            />
-            <Fact label="Teams" accent="text-brand" value="Three to four" note="Per team" />
-            <Fact label="Prize pool" accent="text-gold" value={event.prizePool} />
-            <Fact label="Applications close" accent="text-gold" value={event.deadline} />
+            <Fact label="Who" accent="act" value={event.eligibility} note="No experience needed" />
+            <Fact label="Teams" accent="act" value="Three to four" note="Per team" />
+            <Fact label="Prize pool" accent="time" value={event.prizePool} />
+            <Fact label="Applications close" accent="time" value={event.deadline} />
           </dl>
         </Panel>
 

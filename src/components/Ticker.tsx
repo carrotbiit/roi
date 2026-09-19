@@ -1,11 +1,11 @@
-import { useEffect, useState, type CSSProperties } from 'react'
+import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import type { Snapshot } from '../data/quotes'
 
 /**
  * The market strip: a CP24-style band closing the hero, scrolling the snapshot
- * that `api/ticker.ts` refreshes every five minutes. It sits in the flow at the
- * foot of the first viewport rather than pinned to the screen, so it belongs to
- * the opening rather than following the reader down the page.
+ * that `api/ticker.ts` refreshes every five minutes. It opens in the flow at the
+ * foot of the first viewport, and once the reader scrolls past it, it pins under
+ * the header and follows them down the page.
  *
  * It shows real prices or it shows nothing. If the server has no snapshot the
  * component renders null — no placeholder rows, no last-known numbers without
@@ -13,6 +13,8 @@ import type { Snapshot } from '../data/quotes'
  */
 
 const REFRESH_MS = 5 * 60 * 1000
+/** Height of the sticky site header, which the pinned strip sits under. */
+const HEADER_PX = 64
 /** Seconds of scroll per quote, so a longer board scrolls proportionally. */
 const SECONDS_EACH = 6
 
@@ -48,6 +50,9 @@ function Quotes({ snapshot, hidden }: { snapshot: Snapshot; hidden?: boolean }) 
 export function Ticker() {
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null)
   const [still, setStill] = useState(false)
+  /** True once the strip's place in the flow has scrolled under the header. */
+  const [pinned, setPinned] = useState(false)
+  const anchor = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -56,6 +61,20 @@ export function Ticker() {
     motion.addEventListener('change', sync)
     return () => motion.removeEventListener('change', sync)
   }, [])
+
+  /* Watch the strip's slot in the flow rather than the scroll position: the
+     slot stops being visible exactly when the strip needs to pin, whatever the
+     hero above it is doing. */
+  useEffect(() => {
+    const slot = anchor.current
+    if (!slot) return
+    const io = new IntersectionObserver(
+      ([entry]) => setPinned(!entry.isIntersecting && entry.boundingClientRect.top < HEADER_PX),
+      { rootMargin: `-${HEADER_PX}px 0px 0px 0px`, threshold: 0 },
+    )
+    io.observe(slot)
+    return () => io.disconnect()
+  }, [snapshot])
 
   useEffect(() => {
     let alive = true
@@ -84,34 +103,43 @@ export function Ticker() {
   const time = taken.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
 
   return (
-    <section aria-label="Market data" className="flex h-9 items-stretch border-t border-rule bg-ink">
-      <div
-        className={`group relative min-w-0 flex-1 ${still ? 'overflow-x-auto' : 'overflow-hidden'}`}
+    /* The slot holds the strip's 2.25rem for the rest of the page, so pinning
+       it lifts nothing underneath. */
+    <div ref={anchor} className="h-9">
+      <section
+        aria-label="Market data"
+        className={`flex h-9 items-stretch border-t border-rule bg-ink/95 backdrop-blur-sm ${
+          pinned ? 'fixed inset-x-0 top-16 z-40 border-b' : ''
+        }`}
       >
-        {still ? (
-          /* No crawl under reduced motion: the same board, scrollable by hand,
-             with nothing moving on its own. */
-          <div className="flex h-full items-center">
-            <Quotes snapshot={snapshot} />
-          </div>
-        ) : (
-          <div
-            style={
-              { '--ticker-duration': `${snapshot.quotes.length * SECONDS_EACH}s` } as CSSProperties
-            }
-            className="flex h-full w-max items-center [animation:ticker_var(--ticker-duration)_linear_infinite] group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused]"
-          >
-            <Quotes snapshot={snapshot} />
-            {/* A second pass, so the loop has no gap to cross. */}
-            <Quotes snapshot={snapshot} hidden />
-          </div>
-        )}
-      </div>
+        <div
+          className={`group relative min-w-0 flex-1 ${still ? 'overflow-x-auto' : 'overflow-hidden'}`}
+        >
+          {still ? (
+            /* No crawl under reduced motion: the same board, scrollable by hand,
+               with nothing moving on its own. */
+            <div className="flex h-full items-center">
+              <Quotes snapshot={snapshot} />
+            </div>
+          ) : (
+            <div
+              style={
+                { '--ticker-duration': `${snapshot.quotes.length * SECONDS_EACH}s` } as CSSProperties
+              }
+              className="flex h-full w-max items-center [animation:ticker_var(--ticker-duration)_linear_infinite] group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused]"
+            >
+              <Quotes snapshot={snapshot} />
+              {/* A second pass, so the loop has no gap to cross. */}
+              <Quotes snapshot={snapshot} hidden />
+            </div>
+          )}
+        </div>
 
-      <p className="hidden shrink-0 items-center border-l border-rule px-4 font-mono text-[0.62rem] tracking-[0.2em] text-fg-subtle uppercase sm:flex">
-        <span className="sr-only">Prices as of </span>
-        {time}
-      </p>
-    </section>
+        <p className="hidden shrink-0 items-center border-l border-rule px-4 font-mono text-[0.62rem] tracking-[0.2em] text-fg-subtle uppercase sm:flex">
+          <span className="sr-only">Prices as of </span>
+          {time}
+        </p>
+      </section>
+    </div>
   )
 }
