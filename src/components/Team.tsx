@@ -18,13 +18,13 @@ const initials = (name: string) =>
 
 export function Team() {
   return (
-    <Section id="team" labelledBy="team-heading" className="py-16 md:py-20">
-      <h2 id="team-heading" className="text-2xl md:text-3xl">
+    <Section id="team" labelledBy="team-heading">
+      <h2 id="team-heading" className="text-4xl md:text-5xl">
         Meet the team
       </h2>
 
       {/* Three across at every width: two columns would leave a dead cell. */}
-      <ul className="mt-10 grid grid-cols-3 gap-px border border-rule bg-rule">
+      <ul className="mt-10 grid grid-cols-3 gap-px border border-rule bg-rule md:mt-12">
         {team.map((member, i) => (
           <li key={i} className="bg-ink p-3 sm:p-5">
             <div className="relative aspect-4/5 overflow-hidden bg-surface-2">
@@ -45,10 +45,10 @@ export function Team() {
             </div>
 
             <p className="mt-4 font-display text-base leading-tight text-fg">{member.name}</p>
-            <p className="mt-1 font-mono text-[0.62rem] tracking-[0.2em] text-azure uppercase">
+            <p className="mt-2 font-mono text-xs tracking-[0.2em] text-azure uppercase">
               {member.role}
             </p>
-            <p className="mt-2 text-sm leading-relaxed text-fg/70">{member.note}</p>
+            <p className="mt-4 text-base leading-relaxed text-fg/70">{member.note}</p>
           </li>
         ))}
       </ul>

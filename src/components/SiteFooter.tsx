@@ -8,20 +8,20 @@ export function SiteFooter() {
       <Container className="py-16">
         <div className="max-w-lg">
           <Wordmark className="text-4xl" />
-          <div className="mt-5">
+          <div className="mt-6">
             <TaglineRule text={event.tagline} />
           </div>
         </div>
 
-        <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <h2 className="font-mono text-[0.68rem] tracking-[0.24em] text-fg-subtle uppercase">
+            <h2 className="font-mono text-xs tracking-[0.24em] text-fg-subtle uppercase">
               Pages
             </h2>
-            <ul className="mt-4 space-y-2">
+            <ul className="mt-6 space-y-2">
               {nav.map((item) => (
                 <li key={item.id}>
-                  <a href={item.href} className="text-sm text-fg-muted hover:text-fg">
+                  <a href={item.href} className="text-base text-fg-muted hover:text-fg">
                     {item.label}
                   </a>
                 </li>
@@ -29,10 +29,10 @@ export function SiteFooter() {
             </ul>
           </div>
           <div>
-            <h2 className="font-mono text-[0.68rem] tracking-[0.24em] text-fg-subtle uppercase">
+            <h2 className="font-mono text-xs tracking-[0.24em] text-fg-subtle uppercase">
               Where
             </h2>
-            <address className="mt-4 text-sm not-italic text-fg-muted">
+            <address className="mt-6 text-base not-italic text-fg-muted">
               {event.venue}
               <br />
               {event.street}
@@ -41,27 +41,27 @@ export function SiteFooter() {
             </address>
           </div>
           <div>
-            <h2 className="font-mono text-[0.68rem] tracking-[0.24em] text-fg-subtle uppercase">
+            <h2 className="font-mono text-xs tracking-[0.24em] text-fg-subtle uppercase">
               When
             </h2>
-            <p className="mt-4 text-sm text-fg-muted">
+            <p className="mt-6 text-base text-fg-muted">
               <time dateTime={event.dateISO}>{event.date}</time>
             </p>
           </div>
           <div>
-            <h2 className="font-mono text-[0.68rem] tracking-[0.24em] text-fg-subtle uppercase">
+            <h2 className="font-mono text-xs tracking-[0.24em] text-fg-subtle uppercase">
               Contact
             </h2>
-            <ul className="mt-4 space-y-2">
+            <ul className="mt-6 space-y-2">
               {contacts.map((c) => (
-                <li key={c.label} className="text-sm">
+                <li key={c.label} className="text-base">
                   <a
                     href={c.href}
                     className="font-mono text-fg-muted transition-colors hover:text-brand"
                   >
                     {c.value}
                   </a>
-                  <span className="ml-2 font-mono text-[0.6rem] tracking-[0.2em] text-fg-subtle uppercase">
+                  <span className="ml-2 font-mono text-xs tracking-[0.2em] text-fg-subtle uppercase">
                     {c.label}
                   </span>
                 </li>
@@ -70,7 +70,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <p className="mt-14 border-t border-rule pt-6 font-mono text-[0.68rem] tracking-[0.2em] text-fg-subtle uppercase">
+        <p className="mt-12 border-t border-rule pt-8 font-mono text-xs tracking-[0.2em] text-fg-subtle uppercase">
           © {new Date().getFullYear()} ROI · Every figure and name on this page is placeholder
           content
         </p>

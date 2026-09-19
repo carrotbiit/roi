@@ -31,7 +31,7 @@ export function Section({
     <section
       id={id}
       aria-labelledby={labelledBy}
-      className={`border-t border-rule py-20 md:py-28 ${className}`}
+      className={`border-t border-rule py-16 md:py-24 ${className}`}
     >
       <Container>{children}</Container>
     </section>

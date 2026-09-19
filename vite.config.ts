@@ -46,6 +46,7 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         input: {
           main: fileURLToPath(new URL('index.html', import.meta.url)),
+          apply: fileURLToPath(new URL('apply.html', import.meta.url)),
           sponsor: fileURLToPath(new URL('sponsor.html', import.meta.url)),
           volunteer: fileURLToPath(new URL('volunteer.html', import.meta.url)),
         },

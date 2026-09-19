@@ -8,6 +8,8 @@ export const event = {
   tagline: "Building tomorrow's financial leaders",
   edition: 'Fourth edition',
   season: 'Spring 2026',
+  /** The month, for the hero strip: coarse, and settled long before the day is. */
+  window: 'November 2026',
   date: 'TBA',
   dateISO: '2026-04-18',
   venue: 'Lazaridis Hall',

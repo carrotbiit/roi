@@ -12,7 +12,7 @@ export function HallBand() {
         className="w-full"
       />
       <Container>
-        <figcaption className="py-4 font-mono text-[0.68rem] tracking-[0.24em] text-fg-subtle uppercase">
+        <figcaption className="py-4 font-mono text-xs tracking-[0.24em] text-fg-subtle uppercase">
           Placeholder artwork. Replace with a photograph of the final round.
         </figcaption>
       </Container>
@@ -57,7 +57,7 @@ export function Program() {
                 key={f.label}
                 className="flex justify-between gap-6 border-b border-rule py-3"
               >
-                <dt className="font-mono text-[0.68rem] tracking-[0.2em] text-fg-subtle uppercase">
+                <dt className="font-mono text-xs tracking-[0.2em] text-fg-subtle uppercase">
                   {f.label}
                 </dt>
                 <dd className="text-right text-fg-muted">{f.value}</dd>

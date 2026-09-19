@@ -8,45 +8,45 @@ import { Section } from './layout'
  * before reading a word about the job.
  */
 
-const label = 'font-mono text-[0.68rem] tracking-[0.24em] text-fg-subtle uppercase'
+const label = 'font-mono text-xs tracking-[0.24em] text-fg-subtle uppercase'
 
 export function Volunteer() {
   return (
     <Section id="volunteer" labelledBy="volunteer-heading">
       <header className="max-w-2xl">
-        <h2 id="volunteer-heading" className="text-3xl md:text-4xl">
+        <h2 id="volunteer-heading" className="text-4xl md:text-5xl">
           Volunteer
         </h2>
-        <p className="mt-6 text-base leading-relaxed text-fg/80 md:text-lg">
+        <p className="mt-6 text-lg leading-relaxed text-fg/80 md:text-xl">
           A competition day runs on the people holding the clock. Most roles need no economics
           background at all — they need someone who turns up, keeps a room on schedule and is
           straight with a nervous fifteen-year-old about how long they have left.
         </p>
       </header>
 
-      <ul className="mt-12 grid gap-px border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-4">
+      <ul className="mt-10 grid gap-px border border-rule bg-rule sm:grid-cols-2 md:mt-12 lg:grid-cols-4">
         {volunteerRoles.map((role) => (
           <li key={role.n} className="flex flex-col bg-ink p-6">
-            <h3 className="font-display text-lg leading-tight text-fg">{role.title}</h3>
-            <p className="mt-2 font-mono text-[0.62rem] tracking-[0.2em] text-gold uppercase">
+            <h3 className="font-display text-xl leading-tight text-fg">{role.title}</h3>
+            <p className="mt-2 font-mono text-xs tracking-[0.2em] text-gold uppercase">
               {role.commitment}
             </p>
-            <p className="mt-4 text-sm leading-relaxed text-fg/75">{role.body}</p>
+            <p className="mt-4 text-base leading-relaxed text-fg/75">{role.body}</p>
           </li>
         ))}
       </ul>
 
-      <div className="mt-16 grid gap-10 border-t border-rule pt-10 md:mt-20 md:grid-cols-12">
+      <div className="mt-12 grid gap-10 border-t border-rule pt-8 md:mt-16 md:grid-cols-12">
         <div className="min-w-0 md:col-span-5">
           <h3 className={label}>Putting your name down</h3>
-          <p className="mt-6 text-base leading-relaxed text-fg/80">
+          <p className="mt-6 text-lg leading-relaxed text-fg/80">
             Write to us with the role you want and the hours you can give. We confirm shifts in the
             fortnight before {event.date}, and you can change your mind up to the day without
             explaining yourself.
           </p>
           <a
             href="mailto:hello@roi-pitch.org"
-            className="mt-8 inline-block bg-brand px-6 py-3 font-medium text-ink transition-colors hover:bg-brand-deep hover:text-fg"
+            className="mt-8 inline-block bg-brand px-6 py-3 text-lg font-medium text-ink transition-colors hover:bg-brand-deep hover:text-fg"
           >
             Volunteer for the day
           </a>

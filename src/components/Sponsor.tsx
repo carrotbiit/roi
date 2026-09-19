@@ -12,7 +12,7 @@ import { Section } from './layout'
  * hold, and every way to start the conversation. Every figure is placeholder.
  */
 
-const label = 'font-mono text-[0.68rem] tracking-[0.24em] text-fg-subtle uppercase'
+const label = 'font-mono text-xs tracking-[0.24em] text-fg-subtle uppercase'
 
 /**
  * One accent per package, in the site's instrument colours: gold for the lead
@@ -60,51 +60,51 @@ export function Sponsor() {
   return (
     <Section id="sponsor" labelledBy="sponsor-heading">
       <header className="max-w-2xl">
-        <h2 id="sponsor-heading" className="text-3xl md:text-4xl">
+        <h2 id="sponsor-heading" className="text-4xl md:text-5xl">
           Why sponsor?
         </h2>
-        <p className="mt-6 text-base leading-relaxed text-fg/80 md:text-lg">
+        <p className="mt-6 text-lg leading-relaxed text-fg/80 md:text-xl">
           {event.name} runs on partners. They cover the room, the meals and every waiver, and in
           return they spend a day with a few hundred teenagers who chose to spend a Saturday
           arguing about interest rates.
         </p>
       </header>
 
-      <ul className="mt-12 grid gap-px border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-4">
+      <ul className="mt-10 grid gap-px border border-rule bg-rule sm:grid-cols-2 md:mt-12 lg:grid-cols-4">
         {sponsorReasons.map((reason) => (
           <li key={reason.n} className="flex flex-col bg-ink p-6">
-            <p className="font-mono text-[0.7rem] tracking-[0.24em] text-brand uppercase">
+            <p className="font-mono text-xs tracking-[0.24em] text-brand uppercase">
               {reason.n}
             </p>
-            <h3 className="mt-6 font-display text-lg leading-tight text-fg">{reason.title}</h3>
-            <p className="mt-3 text-sm leading-relaxed text-fg/75">{reason.body}</p>
+            <h3 className="mt-6 font-display text-xl leading-tight text-fg">{reason.title}</h3>
+            <p className="mt-4 text-base leading-relaxed text-fg/75">{reason.body}</p>
           </li>
         ))}
       </ul>
 
-      <div className="mt-16 border-t border-rule pt-10 md:mt-20">
+      <div className="mt-12 border-t border-rule pt-8 md:mt-16">
         <h3 className={label}>Packages</h3>
-        <ul className="mt-8 grid gap-px border border-rule bg-rule lg:grid-cols-3">
+        <ul className="mt-6 grid gap-px border border-rule bg-rule lg:grid-cols-3">
           {sponsorTiers.map((tier, i) => {
             const accent = accents[i] ?? accents[accents.length - 1]
             return (
               <li key={tier.tier} className={`flex flex-col p-6 ${accent.ground}`}>
                 <div className="flex items-baseline justify-between gap-4">
-                  <h4 className={`font-display text-xl leading-tight ${accent.name}`}>
+                  <h4 className={`font-display text-2xl leading-tight ${accent.name}`}>
                     {tier.tier}
                   </h4>
                   {tier.lead && (
                     <span
-                      className={`px-2 py-0.5 font-mono text-[0.6rem] tracking-[0.2em] uppercase ${accent.chip}`}
+                      className={`px-2 py-0.5 font-mono text-xs tracking-[0.2em] uppercase ${accent.chip}`}
                     >
                       Lead
                     </span>
                   )}
                 </div>
-                <p className="mt-4 font-display text-3xl leading-none text-fg tabular-nums">
+                <p className="mt-4 font-display text-4xl leading-none text-fg tabular-nums">
                   {tier.amount}
                 </p>
-                <p className="mt-2 font-mono text-[0.62rem] tracking-[0.2em] text-fg-muted uppercase">
+                <p className="mt-2 font-mono text-xs tracking-[0.2em] text-fg-muted uppercase">
                   {tier.slots}
                 </p>
 
@@ -123,23 +123,23 @@ export function Sponsor() {
             )
           })}
         </ul>
-        <p className="mt-6 text-sm text-fg-muted">
+        <p className="mt-6 text-base text-fg-muted">
           Placeholder figures. The deck carries the current tiers, delegate demographics and last
           year's report.
         </p>
       </div>
 
-      <div className="mt-16 grid gap-10 border-t border-rule pt-10 md:grid-cols-12 md:mt-20">
+      <div className="mt-12 grid gap-10 border-t border-rule pt-8 md:mt-16 md:grid-cols-12">
         <div className="min-w-0 md:col-span-5">
           <h3 className={label}>Ways to contact</h3>
-          <p className="mt-6 text-base leading-relaxed text-fg/80">
+          <p className="mt-6 text-lg leading-relaxed text-fg/80">
             Partnership takes a short call and a one-page agreement. Ask for the deck and we will
             send the current tiers, delegate demographics and last year's report. Commitments for{' '}
             {event.season} close alongside registration on {event.deadline}.
           </p>
           <a
             href="mailto:partners@roi-pitch.org"
-            className="mt-8 inline-block bg-brand px-6 py-3 font-medium text-ink transition-colors hover:bg-brand-deep hover:text-fg"
+            className="mt-8 inline-block bg-brand px-6 py-3 text-lg font-medium text-ink transition-colors hover:bg-brand-deep hover:text-fg"
           >
             Request the deck
           </a>
@@ -155,7 +155,7 @@ export function Sponsor() {
               <dd>
                 <a
                   href={c.href}
-                  className="font-mono text-sm text-fg transition-colors hover:text-brand"
+                  className="font-mono text-base text-fg transition-colors hover:text-brand"
                 >
                   {c.value}
                 </a>

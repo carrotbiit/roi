@@ -5,7 +5,7 @@ import { Section, SectionIndex } from './layout'
 
 const field =
   'mt-2 w-full border border-rule bg-surface px-4 py-3 text-fg placeholder:text-fg-subtle focus:border-brand focus:outline-none'
-const label = 'font-mono text-[0.68rem] tracking-[0.24em] text-fg-subtle uppercase'
+const label = 'font-mono text-xs tracking-[0.24em] text-fg-subtle uppercase'
 
 export function Contact() {
   const [sent, setSent] = useState(false)

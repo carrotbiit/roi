@@ -28,14 +28,14 @@ export function SiteHeader() {
             <a
               key={item.id}
               href={item.href}
-              className="text-sm text-fg-muted transition-colors hover:text-fg"
+              className="text-base text-fg-muted transition-colors hover:text-fg"
             >
               {item.label}
             </a>
           ))}
           <a
-            href="mailto:hello@roi-pitch.org"
-            className="bg-brand px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-brand-deep hover:text-fg"
+            href="/apply.html"
+            className="bg-brand px-4 py-2 text-base font-medium text-ink transition-colors hover:bg-brand-deep hover:text-fg"
           >
             Apply
           </a>
@@ -66,7 +66,7 @@ export function SiteHeader() {
               </a>
             ))}
             <a
-              href="mailto:hello@roi-pitch.org"
+              href="/apply.html"
               onClick={() => setOpen(false)}
               className="block py-3.5 font-medium text-brand"
             >

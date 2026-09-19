@@ -8,8 +8,10 @@ import type { Snapshot } from '../data/quotes'
  * the header and follows them down the page.
  *
  * It shows real prices or it shows nothing. If the server has no snapshot the
- * component renders null — no placeholder rows, no last-known numbers without
- * a timestamp, nothing that could be mistaken for a live market when it isn't.
+ * band stays empty — no placeholder rows, no last-known numbers without a
+ * timestamp, nothing that could be mistaken for a live market when it isn't.
+ * The empty band still holds its height, so a late snapshot never shifts the
+ * page under the reader.
  */
 
 const REFRESH_MS = 5 * 60 * 1000
@@ -26,7 +28,7 @@ function Quotes({ snapshot, hidden }: { snapshot: Snapshot; hidden?: boolean }) 
   return (
     <ul
       aria-hidden={hidden || undefined}
-      className="flex shrink-0 items-center font-mono text-[0.68rem] tracking-[0.06em] tabular-nums"
+      className="flex shrink-0 items-center font-mono text-xs tracking-[0.06em] tabular-nums"
     >
       {snapshot.quotes.map((q) => {
         const up = q.change >= 0
@@ -97,49 +99,51 @@ export function Ticker() {
     }
   }, [])
 
-  if (!snapshot) return null
-
-  const taken = new Date(snapshot.fetchedAt)
-  const time = taken.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  const taken = snapshot && new Date(snapshot.fetchedAt)
+  const time = taken && taken.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
 
   return (
-    /* The slot holds the strip's 2.25rem for the rest of the page, so pinning
-       it lifts nothing underneath. */
+    /* The slot is held from the first paint, empty or not: it keeps the strip's
+       2.25rem while the snapshot is still in flight, so quotes arriving never
+       insert height and nudge the page down, and it holds the same space for
+       the rest of the page once the strip pins. */
     <div ref={anchor} className="h-9">
-      <section
-        aria-label="Market data"
-        className={`flex h-9 items-stretch border-t border-rule bg-ink/95 backdrop-blur-sm ${
-          pinned ? 'fixed inset-x-0 top-16 z-40 border-b' : ''
-        }`}
-      >
-        <div
-          className={`group relative min-w-0 flex-1 ${still ? 'overflow-x-auto' : 'overflow-hidden'}`}
+      {snapshot && (
+        <section
+          aria-label="Market data"
+          className={`flex h-9 items-stretch border-t border-rule bg-ink/95 backdrop-blur-sm ${
+            pinned ? 'fixed inset-x-0 top-16 z-40 border-b' : ''
+          }`}
         >
-          {still ? (
-            /* No crawl under reduced motion: the same board, scrollable by hand,
-               with nothing moving on its own. */
-            <div className="flex h-full items-center">
-              <Quotes snapshot={snapshot} />
-            </div>
-          ) : (
-            <div
-              style={
-                { '--ticker-duration': `${snapshot.quotes.length * SECONDS_EACH}s` } as CSSProperties
-              }
-              className="flex h-full w-max items-center [animation:ticker_var(--ticker-duration)_linear_infinite] group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused]"
-            >
-              <Quotes snapshot={snapshot} />
-              {/* A second pass, so the loop has no gap to cross. */}
-              <Quotes snapshot={snapshot} hidden />
-            </div>
-          )}
-        </div>
+          <div
+            className={`group relative min-w-0 flex-1 ${still ? 'overflow-x-auto' : 'overflow-hidden'}`}
+          >
+            {still ? (
+              /* No crawl under reduced motion: the same board, scrollable by hand,
+                 with nothing moving on its own. */
+              <div className="flex h-full items-center">
+                <Quotes snapshot={snapshot} />
+              </div>
+            ) : (
+              <div
+                style={
+                  { '--ticker-duration': `${snapshot.quotes.length * SECONDS_EACH}s` } as CSSProperties
+                }
+                className="flex h-full w-max items-center [animation:ticker_var(--ticker-duration)_linear_infinite] group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused]"
+              >
+                <Quotes snapshot={snapshot} />
+                {/* A second pass, so the loop has no gap to cross. */}
+                <Quotes snapshot={snapshot} hidden />
+              </div>
+            )}
+          </div>
 
-        <p className="hidden shrink-0 items-center border-l border-rule px-4 font-mono text-[0.62rem] tracking-[0.2em] text-fg-subtle uppercase sm:flex">
-          <span className="sr-only">Prices as of </span>
-          {time}
-        </p>
-      </section>
+          <p className="hidden shrink-0 items-center border-l border-rule px-4 font-mono text-xs tracking-[0.2em] text-fg-subtle uppercase sm:flex">
+            <span className="sr-only">Prices as of </span>
+            {time}
+          </p>
+        </section>
+      )}
     </div>
   )
 }
