@@ -13,6 +13,8 @@ export const event = {
   venue: 'Lazaridis Hall',
   street: '64 University Ave W',
   city: 'Waterloo, Ontario',
+  /** Map pin for the venue, opened from the About grid. */
+  map: 'https://www.google.com/maps/place/Lazaridis+School+of+Business+and+Economics/@43.4750999,-80.5320229,17z/data=!3m1!4b1!4m6!3m5!1s0x882bf3f62c12347f:0x100f39a182234b30!8m2!3d43.475096!4d-80.529448!16s%2Fm%2F0ds44jc',
   eligibility: 'High school students',
   teamSize: 'Teams of three to four',
   deadline: 'TBA',

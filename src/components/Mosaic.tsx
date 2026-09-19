@@ -6,8 +6,8 @@ import { Section } from './layout'
  * About, built from the same parts as the rest of the page: hairline rules on
  * black, monospace meta, and the instrument accents from the palette — gold is
  * time, azure is place and format, green is who and how the score is split.
- * Three panels, so the essentials, the shape of the day and the rubric each get
- * their own surface instead of competing for one.
+ * The essentials grid leads, then the shape of the day and the rubric each get
+ * their own labelled panel instead of competing for one surface.
  */
 
 const meta = 'font-mono text-[0.62rem] tracking-[0.2em] uppercase'
@@ -51,11 +51,14 @@ function Fact({
   accent,
   value,
   note,
+  href,
 }: {
   label: string
   accent: keyof typeof accents
   value: string
   note?: string
+  /** Optional destination for the value, e.g. the venue's map pin. */
+  href?: string
 }) {
   const tone = accents[accent]
   return (
@@ -68,7 +71,19 @@ function Fact({
         {label}
       </dt>
       <dd className="mt-6 transition-transform duration-300 ease-out group-hover:-translate-y-0.5">
-        <span className="block font-display text-lg leading-tight text-fg">{value}</span>
+        {href ? (
+          <a
+            href={href}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-block font-display text-lg leading-tight text-fg underline decoration-rule-strong underline-offset-4 transition-colors hover:decoration-brand hover:text-brand"
+          >
+            {value}
+            <span className="sr-only"> (opens a map in a new tab)</span>
+          </a>
+        ) : (
+          <span className="block font-display text-lg leading-tight text-fg">{value}</span>
+        )}
         {note && <span className="mt-2 block text-sm leading-relaxed text-fg/70">{note}</span>}
       </dd>
     </div>
@@ -83,37 +98,33 @@ export function Mosaic() {
           About ROI
         </h2>
         <p className="mt-6 text-base leading-relaxed text-fg/80 md:text-lg">
-          The world of finance is too interesting to be left to the textbooks.
+          The ROI Stock Pitch Competition brings high school students together to analyze real
+          companies, build an investment thesis, and defend their ideas under pressure.
         </p>
         <p className="mt-4 text-base leading-relaxed text-fg/80 md:text-lg">
-          ROI was built for curious learners who want to understand how money, markets, and
-          businesses really work. Our goal is to create spaces where ideas are explored, challenged,
-          and brought to life with like-minded peers, from understanding why a company succeeds to
-          asking what could happen next.
-        </p>
-        <p className="mt-4 text-base leading-relaxed text-fg/80 md:text-lg">
-          Whether you’re discovering finance for the first time or already following the markets, ROI
-          is a place for curious people to learn from others, challenge their thinking, and turn
-          curiosity into something tangible.
+          <strong className="font-medium text-brand">No prior experience is required:</strong> our
+          workshops give participants the foundation to understand financial markets, analyze
+          companies, and develop their own investment ideas. Teams then put what they’ve learned
+          into practice through live pitches of case studies created by university professors, with
+          their ideas challenged by professionals within the field.
         </p>
       </header>
 
       <div className="mt-12 md:mt-16">
-        <Panel label="Essentials" accent="text-brand">
-          <dl className="mt-8 grid gap-px border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-3">
-            <Fact label="Date" accent="time" value={event.date} />
-            <Fact
-              label="Place"
-              accent="place"
-              value={event.venue}
-              note={`${event.street}, ${event.city}`}
-            />
-            <Fact label="Who" accent="act" value={event.eligibility} note="No experience needed" />
-            <Fact label="Teams" accent="act" value="Three to four" note="Per team" />
-            <Fact label="Prize pool" accent="time" value={event.prizePool} />
-            <Fact label="Applications close" accent="time" value={event.deadline} />
-          </dl>
-        </Panel>
+        <dl className="grid gap-px border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-3">
+          <Fact label="Date" accent="time" value={event.date} />
+          <Fact
+            label="Place"
+            accent="place"
+            value={event.venue}
+            note={`${event.street}, ${event.city}`}
+            href={event.map}
+          />
+          <Fact label="Who" accent="act" value={event.eligibility} note="No experience needed" />
+          <Fact label="Teams" accent="act" value="Three to four" note="Per team" />
+          <Fact label="Prize pool" accent="time" value={event.prizePool} />
+          <Fact label="Applications close" accent="time" value={event.deadline} />
+        </dl>
 
         <Panel label="Format" accent="text-azure">
           {/* Rows, like the workshop list: meta on the left, the phase itself on the right. */}
