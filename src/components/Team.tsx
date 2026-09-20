@@ -18,10 +18,7 @@ const initials = (name: string) =>
 
 export function Team() {
   return (
-    <Section id="team" labelledBy="team-heading">
-      <h2 id="team-heading" className="text-4xl md:text-5xl">
-        Meet the team
-      </h2>
+    <Section id="team" labelledBy="team-heading" ruled={false} className="pt-0! md:pt-0!">
 
       {/* Three across at every width: two columns would leave a dead cell. */}
       <ul className="mt-10 grid grid-cols-3 gap-px border border-rule bg-rule md:mt-12">
@@ -31,7 +28,7 @@ export function Team() {
               {member.photo ? (
                 <img
                   src={member.photo}
-                  alt=""
+                  alt={member.name}
                   className="absolute inset-0 size-full object-cover"
                 />
               ) : (
@@ -44,11 +41,27 @@ export function Team() {
               )}
             </div>
 
-            <p className="mt-4 font-display text-base leading-tight text-fg">{member.name}</p>
+            <p className="mt-4 font-display text-base leading-tight text-fg">
+              {member.linkedin ? (
+                <a
+                  href={member.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="transition-colors hover:text-brand"
+                >
+                  {member.name}
+                  <span className="sr-only"> on LinkedIn (opens in a new tab)</span>
+                </a>
+              ) : (
+                member.name
+              )}
+            </p>
             <p className="mt-2 font-mono text-xs tracking-[0.2em] text-azure uppercase">
               {member.role}
             </p>
-            <p className="mt-4 text-base leading-relaxed text-fg/70">{member.note}</p>
+            {member.note && (
+              <p className="mt-4 text-base leading-relaxed text-fg/70">{member.note}</p>
+            )}
           </li>
         ))}
       </ul>

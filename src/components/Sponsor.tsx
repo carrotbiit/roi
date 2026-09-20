@@ -1,11 +1,11 @@
 import {
-  contacts,
   event,
   sponsorBenefits,
   sponsorReasons,
   sponsorTiers,
 } from '../data/site'
 import { Section } from './layout'
+import { MailLink } from './MailLink'
 
 /**
  * The sponsor pitch: why a partner would want the day, what the three packages
@@ -129,40 +129,19 @@ export function Sponsor() {
         </p>
       </div>
 
-      <div className="mt-12 grid gap-10 border-t border-rule pt-8 md:mt-16 md:grid-cols-12">
-        <div className="min-w-0 md:col-span-5">
-          <h3 className={label}>Ways to contact</h3>
-          <p className="mt-6 text-lg leading-relaxed text-fg/80">
-            Partnership takes a short call and a one-page agreement. Ask for the deck and we will
-            send the current tiers, delegate demographics and last year's report. Commitments for{' '}
-            {event.season} close alongside registration on {event.deadline}.
-          </p>
-          <a
-            href="mailto:partners@roi-pitch.org"
-            className="mt-8 inline-block bg-brand px-6 py-3 text-lg font-medium text-ink transition-colors hover:bg-brand-deep hover:text-fg"
-          >
-            Request the deck
-          </a>
-        </div>
-
-        <dl className="min-w-0 border-t border-rule md:col-span-6 md:col-start-7 md:border-t-0">
-          {contacts.map((c) => (
-            <div
-              key={c.label}
-              className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-rule py-4"
-            >
-              <dt className={label}>{c.label}</dt>
-              <dd>
-                <a
-                  href={c.href}
-                  className="font-mono text-base text-fg transition-colors hover:text-brand"
-                >
-                  {c.value}
-                </a>
-              </dd>
-            </div>
-          ))}
-        </dl>
+      <div className="mt-12 max-w-2xl border-t border-rule pt-8 md:mt-16">
+        <h3 className={label}>Get in touch</h3>
+        <p className="mt-6 text-lg leading-relaxed text-fg/80">
+          Partnership takes a short call and a one-page agreement. Ask for the deck and we will
+          send the current tiers, delegate demographics and last year's report. Commitments for{' '}
+          {event.season} close alongside registration on {event.deadline}.
+        </p>
+        <MailLink
+          subject="ROI sponsorship"
+          className="mt-8 inline-block bg-brand px-6 py-3 text-lg font-medium text-ink transition-colors hover:bg-brand-deep hover:text-fg"
+        >
+          Email us about sponsoring
+        </MailLink>
       </div>
     </Section>
   )

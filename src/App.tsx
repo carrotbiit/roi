@@ -4,6 +4,7 @@ import { MarketBackdrop } from './components/MarketBackdrop'
 import { Mosaic } from './components/Mosaic'
 import { SiteFooter } from './components/SiteFooter'
 import { SiteHeader } from './components/SiteHeader'
+import { Sponsors } from './components/Sponsors'
 import { Team } from './components/Team'
 import { Workshops } from './components/Workshops'
 
@@ -53,6 +54,7 @@ function App() {
         <Hero />
         <Mosaic />
         <Workshops />
+        <Sponsors />
         <Team />
       </main>
       <SiteFooter />

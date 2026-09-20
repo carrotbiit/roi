@@ -10,7 +10,7 @@ export function Container({
   style?: CSSProperties
 }) {
   return (
-    <div className={`mx-auto w-full max-w-6xl px-6 md:px-10 ${className}`} style={style}>
+    <div className={`mx-auto w-full max-w-[76rem] px-5 md:px-8 ${className}`} style={style}>
       {children}
     </div>
   )
@@ -21,17 +21,20 @@ export function Section({
   labelledBy,
   children,
   className = '',
+  ruled = true,
 }: {
   id: string
   labelledBy: string
   children: ReactNode
   className?: string
+  /** The hairline above the section. Off where two sections read as one block. */
+  ruled?: boolean
 }) {
   return (
     <section
       id={id}
       aria-labelledby={labelledBy}
-      className={`border-t border-rule py-16 md:py-24 ${className}`}
+      className={`${ruled ? 'border-t border-rule' : ''} py-16 md:py-24 ${className}`}
     >
       <Container>{children}</Container>
     </section>

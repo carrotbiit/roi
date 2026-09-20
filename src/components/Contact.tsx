@@ -101,7 +101,7 @@ export function Contact() {
               </button>
               <p aria-live="polite" className="text-sm text-fg-muted">
                 {sent
-                  ? 'Received. This demo form does not send mail yet; write to hello@roi-pitch.org in the meantime.'
+                  ? 'Received. This demo form does not send mail yet; write to hello@joinroi.ca in the meantime.'
                   : 'Not yet connected to a mail service.'}
               </p>
             </div>

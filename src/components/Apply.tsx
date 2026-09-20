@@ -1,5 +1,6 @@
-import { event } from '../data/site'
+import { email, event } from '../data/site'
 import { Section } from './layout'
+import { MailLink } from './MailLink'
 
 /**
  * The apply page while the form is still closed: the status first, because it
@@ -48,12 +49,12 @@ export function Apply() {
           Nothing is first come, first served, so there is no advantage in waiting by the page.
         </p>
 
-        <a
-          href="mailto:hello@roi-pitch.org?subject=Tell%20me%20when%20applications%20open"
+        <MailLink
+          subject="Tell me when applications open"
           className="mt-8 inline-block bg-brand px-6 py-3 text-lg font-medium text-ink transition-colors hover:bg-brand-deep hover:text-fg"
         >
           Tell me when it opens
-        </a>
+        </MailLink>
       </header>
 
       <div className="mt-12 border-t border-rule pt-8 md:mt-16">
@@ -93,12 +94,9 @@ export function Apply() {
         </dl>
         <p className="mt-6 text-base text-fg-muted">
           Questions before you apply go to{' '}
-          <a
-            href="mailto:hello@roi-pitch.org"
-            className="font-mono text-fg transition-colors hover:text-brand"
-          >
-            hello@roi-pitch.org
-          </a>
+          <MailLink className="font-mono text-fg transition-colors hover:text-brand">
+            {email}
+          </MailLink>
           .
         </p>
       </div>

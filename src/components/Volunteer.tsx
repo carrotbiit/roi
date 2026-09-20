@@ -1,5 +1,6 @@
 import { event, volunteerFacts, volunteerRoles } from '../data/site'
 import { Section } from './layout'
+import { MailLink } from './MailLink'
 
 /**
  * The volunteer page: the roles that need filling on the day, the terms that
@@ -38,18 +39,18 @@ export function Volunteer() {
 
       <div className="mt-12 grid gap-10 border-t border-rule pt-8 md:mt-16 md:grid-cols-12">
         <div className="min-w-0 md:col-span-5">
-          <h3 className={label}>Putting your name down</h3>
+          <h3 className={label}>Get in touch</h3>
           <p className="mt-6 text-lg leading-relaxed text-fg/80">
             Write to us with the role you want and the hours you can give. We confirm shifts in the
             fortnight before {event.date}, and you can change your mind up to the day without
             explaining yourself.
           </p>
-          <a
-            href="mailto:hello@roi-pitch.org"
+          <MailLink
+            subject="ROI volunteering"
             className="mt-8 inline-block bg-brand px-6 py-3 text-lg font-medium text-ink transition-colors hover:bg-brand-deep hover:text-fg"
           >
-            Volunteer for the day
-          </a>
+            Email us about volunteering
+          </MailLink>
         </div>
 
         <dl className="min-w-0 border-t border-rule md:col-span-6 md:col-start-7 md:border-t-0">

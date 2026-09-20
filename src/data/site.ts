@@ -29,7 +29,7 @@ export const event = {
  * are sections of the home page.
  */
 export const nav = [
-  { id: 'about', label: 'About', href: '/#about' },
+  { id: 'about', label: 'Home', href: '/#about' },
   { id: 'workshops', label: 'Workshops', href: '/#workshops' },
   { id: 'team', label: 'Team', href: '/#team' },
   { id: 'sponsor', label: 'Sponsor', href: '/sponsor.html' },
@@ -38,29 +38,56 @@ export const nav = [
 
 /**
  * The organising team. `photo` is a path under /public; leave it empty and the
- * card falls back to a lettered placeholder.
+ * card falls back to a lettered placeholder. `note` is optional, `linkedin`
+ * turns the name into a link.
  */
-export const team = [
-  { name: 'First Last', role: 'Director', note: 'Grade 12, economics', photo: '' },
-  { name: 'First Last', role: 'Head of judging', note: 'Grade 12, mathematics', photo: '' },
-  { name: 'First Last', role: 'Partnerships', note: 'Grade 11, business', photo: '' },
-] as const
+export type TeamMember = {
+  name: string
+  role: string
+  note: string
+  photo: string
+  linkedin: string
+}
+
+export const team: TeamMember[] = [
+  {
+    name: 'Ryan Tang',
+    role: 'Technology',
+    note: '',
+    photo: '/img/people/Ryan_Tang.png',
+    linkedin: 'https://www.linkedin.com/in/ryan-tang-b3944b372/',
+  },
+  {
+    name: 'Jason Shao',
+    role: 'Logistics',
+    note: '',
+    photo: '/img/people/Jason_Shao.jpg',
+    linkedin: 'https://www.linkedin.com/in/jason-shao-31892941a/',
+  },
+  {
+    name: 'Irtaza Quasim',
+    role: 'Outreach',
+    note: '',
+    photo: '/img/people/Irtaza_Quasim.png',
+    linkedin: 'https://www.linkedin.com/in/irtaza-qasim-baa888388/',
+  },
+]
 
 /** The three phases of the competition day, shown as a stepped list. */
 export const phases = [
   {
     n: 1,
-    name: 'The case',
+    name: 'The Case',
     body: 'At ten in the morning every team opens the same sealed case: one economy, one policy question, and an appendix of real data running back twenty years. Nobody sees it in advance, so preparation counts for method rather than memorised answers.',
   },
   {
     n: 2,
-    name: 'The desk',
+    name: 'The Desk',
     body: 'Four hours to build a position. Teams work in assigned breakout rooms with the data provided and nothing else. Judges hold open office hours over lunch for teams that want to test an argument before they commit to it.',
   },
   {
     n: 3,
-    name: 'The panel',
+    name: 'The Panel',
     body: 'Eight minutes to pitch and seven to answer for it. The panel is made up of practitioners from banking, research and public policy, and they ask the questions they would ask a colleague.',
   },
 ] as const
@@ -272,9 +299,26 @@ export const faqs = [
   },
 ] as const
 
+/**
+ * Sponsors, thanked above the team. `logo` is a path under /public; the list is
+ * short on purpose for now, and grows as partners sign on.
+ */
+export const sponsors = [
+  { name: 'Youth Capital Forum', logo: '/img/sponsors/ycf.png', href: '' },
+] as const
+
+/**
+ * Social accounts, shown as icon links beside the header's Apply button.
+ * Placeholder handles: replace the hrefs, not the shape.
+ */
+export const socials = [
+  { id: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/company/roi-pitch' },
+  { id: 'instagram', label: 'Instagram', href: 'https://www.instagram.com/roi.pitch' },
+] as const
+
+/** The one inbox. Every mail link on the site is built from it. */
+export const email = 'hello@joinroi.ca'
+
 export const contacts = [
-  { label: 'General', value: 'hello@roi-pitch.org', href: 'mailto:hello@roi-pitch.org' },
-  { label: 'Sponsorship', value: 'partners@roi-pitch.org', href: 'mailto:partners@roi-pitch.org' },
-  { label: 'Press', value: 'press@roi-pitch.org', href: 'mailto:press@roi-pitch.org' },
-  { label: 'Telephone', value: '+1 416 555 0142', href: 'tel:+14165550142' },
+  { label: 'General', value: email, href: `mailto:${email}` },
 ] as const

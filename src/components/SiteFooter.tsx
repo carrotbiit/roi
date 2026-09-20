@@ -1,5 +1,6 @@
 import { contacts, event, nav } from '../data/site'
 import { TaglineRule, Wordmark } from './Brand'
+import { MailLink } from './MailLink'
 import { Container } from './layout'
 
 export function SiteFooter() {
@@ -55,15 +56,9 @@ export function SiteFooter() {
             <ul className="mt-6 space-y-2">
               {contacts.map((c) => (
                 <li key={c.label} className="text-base">
-                  <a
-                    href={c.href}
-                    className="font-mono text-fg-muted transition-colors hover:text-brand"
-                  >
+                  <MailLink className="font-mono text-fg-muted transition-colors hover:text-brand">
                     {c.value}
-                  </a>
-                  <span className="ml-2 font-mono text-xs tracking-[0.2em] text-fg-subtle uppercase">
-                    {c.label}
-                  </span>
+                  </MailLink>
                 </li>
               ))}
             </ul>
@@ -71,8 +66,7 @@ export function SiteFooter() {
         </div>
 
         <p className="mt-12 border-t border-rule pt-8 font-mono text-xs tracking-[0.2em] text-fg-subtle uppercase">
-          © {new Date().getFullYear()} ROI · Every figure and name on this page is placeholder
-          content
+          © {new Date().getFullYear()} ROI
         </p>
       </Container>
     </footer>

@@ -1,5 +1,6 @@
-import { faqs } from '../data/site'
+import { email, faqs } from '../data/site'
 import { Section, SectionIndex } from './layout'
+import { MailLink } from './MailLink'
 
 export function Faq() {
   return (
@@ -12,12 +13,9 @@ export function Faq() {
           </h2>
           <p className="mt-6 text-fg-muted">
             Anything not covered here goes to{' '}
-            <a
-              href="mailto:hello@roi-pitch.org"
-              className="border-b border-rule-strong text-fg transition-colors hover:border-brand"
-            >
-              hello@roi-pitch.org
-            </a>
+            <MailLink className="border-b border-rule-strong text-fg transition-colors hover:border-brand">
+              {email}
+            </MailLink>
             . We answer within two working days.
           </p>
         </div>
