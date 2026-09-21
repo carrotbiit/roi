@@ -65,10 +65,10 @@ export const team: TeamMember[] = [
     linkedin: 'https://www.linkedin.com/in/jason-shao-31892941a/',
   },
   {
-    name: 'Irtaza Quasim',
+    name: 'Irtaza Qasim',
     role: 'Outreach',
     note: '',
-    photo: '/img/people/Irtaza_Quasim.png',
+    photo: '/img/people/Irtaza_Qasim.png',
     linkedin: 'https://www.linkedin.com/in/irtaza-qasim-baa888388/',
   },
 ]

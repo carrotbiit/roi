@@ -4,8 +4,8 @@ import { Section } from './layout'
 
 /**
  * About, built from the same parts as the rest of the page: hairline rules on
- * black, monospace meta, and the instrument accents from the palette — gold is
- * time, azure is place and format, green is who and how many.
+ * black, monospace meta, and azure — the palette's place-and-format colour —
+ * across every label, so the essentials read as one instrument.
  * The essentials grid leads, then the shape of the day gets its own labelled
  * panel below it.
  */
@@ -32,18 +32,8 @@ function Panel({
 }
 
 /**
- * Instrument accents, as static pairs so Tailwind keeps every colour in the
- * build: gold is time, azure is place, green is who and how many.
- */
-const accents = {
-  time: { text: 'text-gold', bar: 'bg-gold' },
-  place: { text: 'text-azure', bar: 'bg-azure' },
-  act: { text: 'text-brand', bar: 'bg-brand' },
-}
-
-/**
  * One essential: a monospace label over the fact it names. On hover the ground
- * lifts off black and the accent rule draws across the top edge, left to right,
+ * lifts off black and the azure rule draws across the top edge, left to right,
  * the way the hero mark draws itself.
  *
  * Given a destination, the whole cell is the target. The link is an overlay
@@ -52,14 +42,12 @@ const accents = {
  */
 function Fact({
   label,
-  accent,
   value,
   note,
   href,
   away,
 }: {
   label: string
-  accent: keyof typeof accents
   value: string
   note?: string
   /** Optional destination for the whole cell, e.g. the venue's map pin. */
@@ -67,7 +55,6 @@ function Fact({
   /** Set for a destination off the site, which opens in its own tab. */
   away?: string
 }) {
-  const tone = accents[accent]
   return (
     <div
       className={`group relative flex flex-col overflow-hidden bg-ink p-6 transition-colors duration-300 ease-out hover:bg-surface-2 ${
@@ -76,9 +63,9 @@ function Fact({
     >
       <span
         aria-hidden="true"
-        className={`absolute inset-x-0 top-0 h-px origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100 group-focus-within:scale-x-100 ${tone.bar}`}
+        className="absolute inset-x-0 top-0 h-px origin-left scale-x-0 bg-azure transition-transform duration-500 ease-out group-hover:scale-x-100 group-focus-within:scale-x-100"
       />
-      <dt className={`font-mono text-sm tracking-[0.18em] uppercase md:text-base ${tone.text}`}>
+      <dt className="font-mono text-sm tracking-[0.18em] text-azure uppercase md:text-base">
         {label}
       </dt>
       <dd className="mt-6 transition-transform duration-300 ease-out group-hover:-translate-y-0.5">
@@ -138,21 +125,19 @@ export function Mosaic() {
 
       <div className="mt-10 md:mt-12">
         <dl className="grid gap-px border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-3">
-          <Fact label="Date" accent="time" value={event.date} />
+          <Fact label="Date" value={event.date} />
           <Fact
             label="Place"
-            accent="place"
             value={event.venue}
             note={`${event.street}, ${event.city}`}
             href={event.map}
             away="map"
           />
-          <Fact label="Who" accent="act" value={event.eligibility} note="No experience needed" />
-          <Fact label="Teams" accent="act" value="Three to four" note="Per team" />
-          <Fact label="Prize pool" accent="time" value={event.prizePool} />
+          <Fact label="Who" value={event.eligibility} note="No experience needed" />
+          <Fact label="Teams" value="Three to four" note="Per team" />
+          <Fact label="Prize pool" value={event.prizePool} />
           <Fact
             label="Applications close"
-            accent="time"
             value={event.deadline}
             note="Apply to compete"
             href="/apply.html"

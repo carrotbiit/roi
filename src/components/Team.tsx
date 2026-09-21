@@ -1,4 +1,5 @@
 import { team } from '../data/site'
+import { brandIcon } from './icons'
 import { Section } from './layout'
 
 /**
@@ -41,21 +42,23 @@ export function Team() {
               )}
             </div>
 
-            <p className="mt-4 font-display text-base leading-tight text-fg">
-              {member.linkedin ? (
+            {/* Name stays plain text; the mark beside it carries the link. */}
+            <div className="mt-4 flex items-start justify-between gap-2">
+              <p className="font-display text-base leading-tight text-fg">{member.name}</p>
+              {member.linkedin && (
                 <a
                   href={member.linkedin}
                   target="_blank"
                   rel="noreferrer"
-                  className="transition-colors hover:text-brand"
+                  className="-m-1 shrink-0 p-1 text-fg-muted transition-colors hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
                 >
-                  {member.name}
-                  <span className="sr-only"> on LinkedIn (opens in a new tab)</span>
+                  <svg viewBox="0 0 24 24" aria-hidden="true" className="size-4 fill-current">
+                    <path d={brandIcon.linkedin} />
+                  </svg>
+                  <span className="sr-only">{member.name} on LinkedIn (opens in a new tab)</span>
                 </a>
-              ) : (
-                member.name
               )}
-            </p>
+            </div>
             <p className="mt-2 font-mono text-xs tracking-[0.2em] text-azure uppercase">
               {member.role}
             </p>
