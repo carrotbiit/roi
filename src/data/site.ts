@@ -39,14 +39,14 @@ export const expectations = [
 
 /**
  * Primary navigation. Hrefs are absolute so the same list works from the home
- * page and from any page of its own: sponsor is a separate document, the rest
- * are sections of the home page.
+ * page and from any page of its own.
  */
 export const nav = [
   { id: 'about', label: 'Home', href: '/#about' },
   { id: 'workshops', label: 'Workshops', href: '/#workshops' },
   { id: 'team', label: 'Team', href: '/#team' },
-  { id: 'sponsor', label: 'Sponsor', href: '/sponsor.html' },
+  // Hidden for now: restore this line to put the sponsor page back in the nav (it stays reachable from the hero).
+  // { id: 'sponsor', label: 'Sponsor', href: '/sponsor.html' },
   // Hidden for now: restore this line (and the volunteer input in vite.config.ts) to bring the page back.
   // { id: 'volunteer', label: 'Volunteer', href: '/volunteer.html' },
 ] as const
