@@ -43,7 +43,6 @@ export const nav = [
  */
 export type TeamMember = {
   name: string
-  role: string
   note: string
   photo: string
   linkedin: string
@@ -52,21 +51,18 @@ export type TeamMember = {
 export const team: TeamMember[] = [
   {
     name: 'Ryan Tang',
-    role: 'Technology',
     note: '',
-    photo: '/img/people/Ryan_Tang.png',
+    photo: '/img/people/Ryan_Tang.jpg',
     linkedin: 'https://www.linkedin.com/in/ryan-tang-b3944b372/',
   },
   {
     name: 'Jason Shao',
-    role: 'Logistics',
     note: '',
     photo: '/img/people/Jason_Shao.jpg',
     linkedin: 'https://www.linkedin.com/in/jason-shao-31892941a/',
   },
   {
     name: 'Irtaza Quasim',
-    role: 'Outreach',
     note: '',
     photo: '/img/people/Irtaza_Quasim.png',
     linkedin: 'https://www.linkedin.com/in/irtaza-qasim-baa888388/',
@@ -154,40 +150,6 @@ export const volunteerFacts = [
   { label: 'Training', value: 'One online briefing the week before' },
   { label: 'Meals', value: 'Breakfast and lunch provided' },
   { label: 'References', value: 'Reference letters on request' },
-] as const
-
-/**
- * Optional sessions in the run-up to the competition. Add or remove entries
- * freely — the section is a list and takes any number of them.
- */
-export const workshops = [
-  {
-    n: '01',
-    title: 'TBA',
-    date: 'TBA',
-    time: 'TBA',
-    format: 'TBA',
-    level: 'TBA',
-    body: 'Topic, date and format to be announced.',
-  },
-  {
-    n: '02',
-    title: 'TBA',
-    date: 'TBA',
-    time: 'TBA',
-    format: 'TBA',
-    level: 'TBA',
-    body: 'Topic, date and format to be announced.',
-  },
-  {
-    n: '03',
-    title: 'TBA',
-    date: 'TBA',
-    time: 'TBA',
-    format: 'TBA',
-    level: 'TBA',
-    body: 'Topic, date and format to be announced.',
-  },
 ] as const
 
 /** The case for partnering, four panels wide. */
@@ -305,6 +267,7 @@ export const faqs = [
  */
 export const sponsors = [
   { name: 'Youth Capital Forum', logo: '/img/sponsors/ycf.png', href: '' },
+  { name: 'Laurier Asset Management Association', logo: '/img/sponsors/LAMA.jpg', href: '' },
 ] as const
 
 /**

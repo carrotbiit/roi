@@ -2,15 +2,14 @@ import { sponsors } from '../data/site'
 import { Section } from './layout'
 
 /**
- * Thanks to the people paying for the room. One logo for now, so the row is
- * centred rather than stretched: adding partners fills it left to right without
- * touching the layout.
+ * Thanks to the people paying for the room. The row is centred rather than
+ * stretched: adding partners fills it left to right without touching the layout.
  */
 export function Sponsors() {
   return (
     <Section id="sponsors" labelledBy="sponsors-heading" className="pb-8! md:pb-10!">
       <h2 id="sponsors-heading" className="text-3xl md:text-4xl">
-        Thank You to our Sponsors:
+        Thank You to our Partners:
       </h2>
 
       <ul className="mt-10 flex flex-wrap items-center justify-center gap-x-16 gap-y-12 md:mt-12">

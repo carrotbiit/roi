@@ -56,9 +56,6 @@ export function Team() {
                 member.name
               )}
             </p>
-            <p className="mt-2 font-mono text-xs tracking-[0.2em] text-azure uppercase">
-              {member.role}
-            </p>
             {member.note && (
               <p className="mt-4 text-base leading-relaxed text-fg/70">{member.note}</p>
             )}

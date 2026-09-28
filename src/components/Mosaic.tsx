@@ -151,7 +151,7 @@ export function Mosaic() {
           <Fact label="Teams" accent="act" value="Three to four" note="Per team" />
           <Fact label="Prize pool" accent="time" value={event.prizePool} />
           <Fact
-            label="Applications close"
+            label="Applications due"
             accent="time"
             value={event.deadline}
             note="Apply to compete"
