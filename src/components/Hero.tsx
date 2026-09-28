@@ -26,7 +26,7 @@ export function Hero() {
           className="animate-rise mt-10 max-w-2xl text-4xl md:text-5xl"
           style={{ animationDelay: delay.copy }}
         >
-          A macroeconomics pitch competition for high school students.
+          A stock pitch competition for high school students.
         </h1>
 
         <div

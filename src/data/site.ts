@@ -21,7 +21,21 @@ export const event = {
   teamSize: 'Teams of three to four',
   deadline: 'TBA',
   prizePool: '$1000+',
+  /** The interest form, linked from the apply page until registration opens. */
+  interestForm: 'https://forms.gle/79fBCguYXH8iTkDc7',
 } as const
+
+/** What delegates get out of ROI, listed on the apply page. */
+export const expectations = [
+  '$1,000+ in prize money',
+  'Medals and awards',
+  'Workshops with LAMA',
+  'Case studies developed and assessed by Laurier professors',
+  'Networking with peers, professors, and LAMA executives',
+  'Laurier campus tour',
+  'Food provided',
+  'Free to enter',
+] as const
 
 /**
  * Primary navigation. Hrefs are absolute so the same list works from the home
@@ -63,31 +77,34 @@ export const team: TeamMember[] = [
     linkedin: 'https://www.linkedin.com/in/jason-shao-31892941a/',
   },
   {
-    name: 'Irtaza Quasim',
+    name: 'Irtaza Qasim',
     note: '',
     photo: '/img/people/Irtaza_Qasim.png',
     linkedin: 'https://www.linkedin.com/in/irtaza-qasim-baa888388/',
   },
 ]
 
-/** The three phases of the competition day, shown as a stepped list. */
+/** The three rounds of the competition day, shown as a stepped list. */
 export const phases = [
   {
     n: 1,
-    name: 'The Case',
-    body: 'At ten in the morning every team opens the same sealed case: one economy, one policy question, and an appendix of real data running back twenty years. Nobody sees it in advance, so preparation counts for method rather than memorised answers.',
+    name: 'Preliminary Round',
+    body: 'In the morning, every team is given a case study and builds its pitch alongside a LAMA analyst. Each pitch is then presented to and reviewed by the LAMA executive team.',
   },
   {
     n: 2,
-    name: 'The Desk',
-    body: 'Four hours to build a position. Teams work in assigned breakout rooms with the data provided and nothing else. Judges hold open office hours over lunch for teams that want to test an argument before they commit to it.',
+    name: 'Semi-finals',
+    body: 'Advancing teams receive a new case study and repeat the process: build the pitch, then present it. This time, the pitches are reviewed by Laurier professors.',
   },
   {
     n: 3,
-    name: 'The Panel',
-    body: 'Eight minutes to pitch and seven to answer for it. The panel is made up of practitioners from banking, research and public policy, and they ask the questions they would ask a colleague.',
+    name: 'Finals',
+    body: 'The finalists take on one last, different case study and pitch it to a panel of Laurier professors.',
   },
 ] as const
+
+/** Shown under the format list until the details are settled. */
+export const formatNote = 'More specifics of the format will be announced closer to the date of the event.'
 
 /** Scoring rubric, published in full to registered delegates. */
 export const rubric = [
@@ -174,36 +191,28 @@ export const sponsorBenefits = [
 
 export const faqs = [
   {
-    q: 'Who can enter?',
-    a: 'Any student in grades 9 to 12, or the international equivalent, during the 2025 to 2026 school year. No economics coursework is required. About a third of last year’s delegates had never taken an economics class.',
+    q: 'Do I need to pay to register?',
+    a: 'No. Registration for the ROI Stock Pitch Competition is completely free.',
   },
   {
-    q: 'Do I need a full team to register?',
-    a: 'Teams are two to four students. Register on your own and we will place you on a team in the week before the event, matched on track preference and experience.',
+    q: 'How will the competition be judged?',
+    a: 'More information about the judging criteria and evaluation process will be revealed closer to the competition.',
   },
   {
-    q: 'What is in the case?',
-    a: 'One economy, one policy question, and a data appendix of roughly thirty exhibits. Past cases have covered a central bank facing a wage spiral, a commodity exporter managing a currency peg, and a government choosing between two fiscal packages.',
+    q: 'Do I need to bring anything?',
+    a: 'Yes. Participants should bring a laptop and charger to help with research and creating their pitch.',
   },
   {
-    q: 'How is a pitch scored?',
-    a: 'Four weighted criteria: economic reasoning at 40 per cent, use of evidence at 25, clarity of delivery at 20, and performance under cross-examination at 15. The full rubric goes out to registered delegates two weeks before the event.',
+    q: 'What should I wear?',
+    a: 'ROI is a formal competition, so a suit is recommended; however, business casual attire is also appropriate.',
   },
   {
-    q: 'What does it cost?',
-    a: 'Thirty-five dollars per delegate, covering materials and two meals. Need-based waivers are granted at registration without documentation, and waiver status is never shared with judges or panels.',
+    q: 'Is transportation provided?',
+    a: 'Transportation to and from the event is not provided. Participants are responsible for arranging their own transportation. Public buses are readily available for getting to Lazaridis Hall.',
   },
   {
-    q: 'How should I prepare?',
-    a: 'Registered delegates receive a primer on the core indicators, three retired cases with annotated winning pitches, and access to two optional online workshops in the month beforehand.',
-  },
-  {
-    q: 'What can I bring on the day?',
-    a: 'A laptop, a charger and student identification. Paper and calculators are provided. Outside research materials may not be used once the case is released.',
-  },
-  {
-    q: 'Can teachers and parents attend?',
-    a: 'Chaperones are welcome in the gallery for the final round and the awards. Preliminary rounds are closed so the breakout rooms stay focused on delegates.',
+    q: 'Will food be provided?',
+    a: 'Yes. One meal will be provided for all participants.',
   },
 ] as const
 

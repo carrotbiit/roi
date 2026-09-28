@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { event, phases } from '../data/site'
+import { event, formatNote, phases } from '../data/site'
 import { Section } from './layout'
 
 /**
@@ -117,7 +117,7 @@ export function Mosaic() {
           </strong>
           , with their ideas challenged by{' '}
           <strong className="font-medium text-brand">
-            professionals within the field
+            professors
           </strong>
           .
         </p>
@@ -153,7 +153,7 @@ export function Mosaic() {
                 className="grid gap-x-10 gap-y-4 border-b border-rule py-7 md:grid-cols-12 md:py-8"
               >
                 <div className="md:col-span-4">
-                  <p className={`${meta} text-azure`}>Phase {String(phase.n).padStart(2, '0')}</p>
+                  <p className={`${meta} text-azure`}>Round {String(phase.n).padStart(2, '0')}</p>
                   <h4 className="mt-3 font-display text-xl leading-tight text-fg">{phase.name}</h4>
                 </div>
                 <p className="max-w-2xl text-base leading-relaxed text-fg/75 md:col-span-8 md:text-lg">
@@ -162,6 +162,7 @@ export function Mosaic() {
               </li>
             ))}
           </ul>
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-fg/70">{formatNote}</p>
         </Panel>
       </div>
     </Section>
