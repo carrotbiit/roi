@@ -138,7 +138,6 @@ export function Mosaic() {
           <Fact label="Prize pool" value={event.prizePool} />
           <Fact
             label="Applications due"
-            accent="time"
             value={event.deadline}
             note="Apply to compete"
             href="/apply.html"
