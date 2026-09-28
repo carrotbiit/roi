@@ -58,7 +58,7 @@ export function Team() {
                   <span className="sr-only">{member.name} on LinkedIn (opens in a new tab)</span>
                 </a>
               )}
-            </p>
+            </div>
             {member.note && (
               <p className="mt-4 text-base leading-relaxed text-fg/70">{member.note}</p>
             )}

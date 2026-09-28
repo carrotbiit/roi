@@ -1,12 +1,10 @@
-import { event, volunteerFacts, volunteerRoles } from '../data/site'
+import { event, volunteerFacts } from '../data/site'
 import { Section } from './layout'
 import { MailLink } from './MailLink'
 
 /**
- * The volunteer page: the roles that need filling on the day, the terms that
- * go with them, and one way to put your name down. Commitments are set in gold
- * — the site's colour for time — so a reader can find the shift that fits
- * before reading a word about the job.
+ * The volunteer page: the terms that go with the day and one way to put your
+ * name down.
  */
 
 const label = 'font-mono text-xs tracking-[0.24em] text-fg-subtle uppercase'
@@ -24,18 +22,6 @@ export function Volunteer() {
           straight with a nervous fifteen-year-old about how long they have left.
         </p>
       </header>
-
-      <ul className="mt-10 grid gap-px border border-rule bg-rule sm:grid-cols-2 md:mt-12 lg:grid-cols-4">
-        {volunteerRoles.map((role) => (
-          <li key={role.n} className="flex flex-col bg-ink p-6">
-            <h3 className="font-display text-xl leading-tight text-fg">{role.title}</h3>
-            <p className="mt-2 font-mono text-xs tracking-[0.2em] text-gold uppercase">
-              {role.commitment}
-            </p>
-            <p className="mt-4 text-base leading-relaxed text-fg/75">{role.body}</p>
-          </li>
-        ))}
-      </ul>
 
       <div className="mt-12 grid gap-10 border-t border-rule pt-8 md:mt-16 md:grid-cols-12">
         <div className="min-w-0 md:col-span-5">

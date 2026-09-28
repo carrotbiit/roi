@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { Faq } from './components/Faq'
 import { Hero } from './components/Hero'
 import { MarketBackdrop } from './components/MarketBackdrop'
 import { Mosaic } from './components/Mosaic'
@@ -54,6 +55,7 @@ function App() {
         <Hero />
         <Mosaic />
         <Workshops />
+        <Faq />
         <Sponsors />
         <Team />
       </main>

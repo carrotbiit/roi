@@ -99,10 +99,10 @@ export function Mosaic() {
     <Section id="about" labelledBy="about-heading">
       <header className="max-w-2xl">
         <h2 id="about-heading" className="text-4xl md:text-5xl">
-          About <span className="text-gold">ROI</span>
+          About <span className="text-brand">ROI</span>
         </h2>
         <p className="mt-6 text-lg leading-relaxed text-fg/80 md:text-xl">
-          The <span className="text-gold">ROI</span>{' '}
+          The <span className="text-brand">ROI</span>{' '}
           <span className="font-medium text-brand">Stock Pitch Competition</span>{' '}
           brings high school students together to analyze real companies, build an investment
           thesis, and defend their ideas under pressure.

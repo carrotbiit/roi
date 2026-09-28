@@ -1,7 +1,6 @@
 import {
   event,
   sponsorBenefits,
-  sponsorReasons,
   sponsorTiers,
 } from '../data/site'
 import { Section } from './layout'
@@ -9,7 +8,7 @@ import { MailLink } from './MailLink'
 
 /**
  * The sponsor pitch: why a partner would want the day, what the three packages
- * hold, and every way to start the conversation. Every figure is placeholder.
+ * hold, and how to start the conversation. Every figure is placeholder.
  */
 
 const label = 'font-mono text-xs tracking-[0.24em] text-fg-subtle uppercase'
@@ -69,18 +68,6 @@ export function Sponsor() {
           arguing about interest rates.
         </p>
       </header>
-
-      <ul className="mt-10 grid gap-px border border-rule bg-rule sm:grid-cols-2 md:mt-12 lg:grid-cols-4">
-        {sponsorReasons.map((reason) => (
-          <li key={reason.n} className="flex flex-col bg-ink p-6">
-            <p className="font-mono text-xs tracking-[0.24em] text-brand uppercase">
-              {reason.n}
-            </p>
-            <h3 className="mt-6 font-display text-xl leading-tight text-fg">{reason.title}</h3>
-            <p className="mt-4 text-base leading-relaxed text-fg/75">{reason.body}</p>
-          </li>
-        ))}
-      </ul>
 
       <div className="mt-12 border-t border-rule pt-8 md:mt-16">
         <h3 className={label}>Packages</h3>

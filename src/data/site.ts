@@ -10,8 +10,8 @@ export const event = {
   season: 'Spring 2026',
   /** The month, for the hero strip: coarse, and settled long before the day is. */
   window: 'November 2026',
-  date: 'TBA',
-  dateISO: '2026-04-18',
+  date: 'Late November',
+  dateISO: '2026-11',
   venue: 'Lazaridis Hall',
   street: '64 University Ave W',
   city: 'Waterloo, Ontario',
@@ -33,7 +33,8 @@ export const nav = [
   { id: 'workshops', label: 'Workshops', href: '/#workshops' },
   { id: 'team', label: 'Team', href: '/#team' },
   { id: 'sponsor', label: 'Sponsor', href: '/sponsor.html' },
-  { id: 'volunteer', label: 'Volunteer', href: '/volunteer.html' },
+  // Hidden for now: restore this line (and the volunteer input in vite.config.ts) to bring the page back.
+  // { id: 'volunteer', label: 'Volunteer', href: '/volunteer.html' },
 ] as const
 
 /**
@@ -113,67 +114,12 @@ export const venueFacts = [
   { label: 'Meals', value: 'Breakfast and lunch provided' },
 ] as const
 
-/**
- * Volunteer roles on the day. Add or remove entries freely — the page is a
- * list and takes any number of them.
- */
-export const volunteerRoles = [
-  {
-    n: '01',
-    title: 'Room marshal',
-    commitment: 'Full day, 08:00 to 18:00',
-    body: 'Keep one breakout room on schedule: open the block, hold the clock, and make sure every team knows how long it has left.',
-  },
-  {
-    n: '02',
-    title: 'Registration desk',
-    commitment: 'Morning, 07:30 to 11:00',
-    body: 'The first face of the day. Check delegates in, hand out packs, and point people at the right room before the case is released.',
-  },
-  {
-    n: '03',
-    title: 'Judge liaison',
-    commitment: 'Afternoon, 13:00 to 18:00',
-    body: 'Look after the panel: brief judges on the rubric, collect score sheets between rounds, and keep the final running to time.',
-  },
-  {
-    n: '04',
-    title: 'Setup and pack-down',
-    commitment: 'Either end of the day',
-    body: 'Signage, seating, cabling and the hundred small things that decide whether a venue works. The shift that makes every other one possible.',
-  },
-] as const
-
 /** Practical terms, answered before anyone has to ask. */
 export const volunteerFacts = [
   { label: 'Who', value: 'University students, teachers, alumni, 16 and over' },
   { label: 'Training', value: 'One online briefing the week before' },
   { label: 'Meals', value: 'Breakfast and lunch provided' },
   { label: 'References', value: 'Reference letters on request' },
-] as const
-
-/** The case for partnering, four panels wide. */
-export const sponsorReasons = [
-  {
-    n: '01',
-    title: 'A room that opted in',
-    body: 'Three hundred delegates give up a Saturday to argue about monetary policy, and their teachers and families come with them. Your mark sits on the materials they take home.',
-  },
-  {
-    n: '02',
-    title: 'Time on the floor',
-    body: 'Partners take a table for the day and a seat on the judging panel. Your team meets delegates over a case rather than across a careers fair.',
-  },
-  {
-    n: '03',
-    title: 'No barriers at the door',
-    body: 'Sponsorship covers the venue, meals and every fee waiver requested, so cost never decides which students compete.',
-  },
-  {
-    n: '04',
-    title: 'A report afterwards',
-    body: 'Delegate numbers, schools represented and what the judges saw, sent to every partner within three weeks of the final.',
-  },
 ] as const
 
 export const sponsorTiers = [
@@ -272,11 +218,11 @@ export const sponsors = [
 
 /**
  * Social accounts, shown as icon links beside the header's Apply button.
- * Placeholder handles: replace the hrefs, not the shape.
+ * Links to the real accounts.
  */
 export const socials = [
-  { id: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/company/roi-pitch' },
-  { id: 'instagram', label: 'Instagram', href: 'https://www.instagram.com/roi.pitch' },
+  { id: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/company/joinroi/' },
+  { id: 'instagram', label: 'Instagram', href: 'https://www.instagram.com/join.roi' },
 ] as const
 
 /** The one inbox. Every mail link on the site is built from it. */
