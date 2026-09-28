@@ -64,7 +64,7 @@ export const team: TeamMember[] = [
   {
     name: 'Irtaza Quasim',
     note: '',
-    photo: '/img/people/Irtaza_Quasim.png',
+    photo: '/img/people/Irtaza_Qasim.png',
     linkedin: 'https://www.linkedin.com/in/irtaza-qasim-baa888388/',
   },
 ]
