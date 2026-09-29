@@ -45,7 +45,7 @@ export const nav = [
   { id: 'about', label: 'Home', href: '/#about' },
   { id: 'workshops', label: 'Workshops', href: '/#workshops' },
   { id: 'team', label: 'Team', href: '/#team' },
-  // Hidden for now: restore this line to put the sponsor page back in the nav (it stays reachable from the hero).
+  // Hidden for now: restore this line to put the sponsor page back in the nav.
   // { id: 'sponsor', label: 'Sponsor', href: '/sponsor.html' },
   // Hidden for now: restore this line (and the volunteer input in vite.config.ts) to bring the page back.
   // { id: 'volunteer', label: 'Volunteer', href: '/volunteer.html' },

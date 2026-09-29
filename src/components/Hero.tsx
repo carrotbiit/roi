@@ -39,12 +39,6 @@ export function Hero() {
           >
             Apply to compete
           </a>
-          <a
-            href="/sponsor.html"
-            className="border-b border-rule-strong pb-1 text-lg text-fg-muted transition-colors hover:border-brand hover:text-fg"
-          >
-            Sponsor the event
-          </a>
         </div>
       </Container>
 
