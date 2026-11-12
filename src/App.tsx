@@ -7,7 +7,7 @@ import { SiteFooter } from './components/SiteFooter'
 import { SiteHeader } from './components/SiteHeader'
 import { Sponsors } from './components/Sponsors'
 import { Team } from './components/Team'
-import { Workshops } from './components/Workshops'
+import { Support } from './components/Support'
 
 /**
  * Arriving from another page of the site, e.g. /#about, the hash names a
@@ -54,7 +54,7 @@ function App() {
       <main id="main">
         <Hero />
         <Mosaic />
-        <Workshops />
+        <Support />
         <Faq />
         <Sponsors />
         <Team />

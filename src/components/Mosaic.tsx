@@ -97,7 +97,8 @@ function Fact({
 export function Mosaic() {
   return (
     <Section id="about" labelledBy="about-heading">
-      <header className="max-w-2xl">
+      <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+      <header className="max-w-2xl lg:col-span-7">
         <h2 id="about-heading" className="text-4xl md:text-5xl">
           About <span className="text-brand">ROI</span>
         </h2>
@@ -108,9 +109,9 @@ export function Mosaic() {
           thesis, and defend their ideas under pressure.
         </p>
         <p className="mt-4 text-lg leading-relaxed text-fg/80 md:text-xl">
-          <strong className="font-medium text-brand">No prior experience is required:</strong> our
-          workshops give participants the foundation to understand financial markets, analyze
-          companies, and develop their own investment ideas. Teams then put what they’ve learned
+          <strong className="font-medium text-brand">No prior experience is required:</strong> every
+          team is paired with a LAMA analyst, and a beginner intro package is sent out with all the
+          information needed to learn. Teams then put what they’ve learned
           into practice through{' '}
           <strong className="font-medium text-brand">
             live pitches of case studies created by university professors
@@ -123,6 +124,18 @@ export function Mosaic() {
         </p>
       </header>
 
+      <figure className="lg:col-span-5">
+        <img
+          src="/img/poster.jpg"
+          alt="ROI High School Stock Pitch Competition 2026 poster: November 28th, $1000 prize pool, sponsored by the Lazaridis School of Business & Economics at Wilfrid Laurier University."
+          width={1320}
+          height={1642}
+          loading="lazy"
+          className="mx-auto w-full max-w-md border border-rule"
+        />
+      </figure>
+      </div>
+
       <div className="mt-10 md:mt-12">
         <dl className="grid gap-px border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-3">
           <Fact label="Date" value={event.date} />
@@ -134,18 +147,18 @@ export function Mosaic() {
             away="map"
           />
           <Fact label="Who" value={event.eligibility} note="No experience needed" />
-          <Fact label="Teams" value="Three to four" note="Per team" />
+          <Fact label="Teams" value="Two to four" note="Free agents welcome" />
           <Fact label="Prize pool" value={event.prizePool} />
           <Fact
             label="Applications due"
             value={event.deadline}
-            note="Apply to compete"
+            note="Applications open"
             href="/apply.html"
           />
         </dl>
 
         <Panel label="Format" accent="text-azure">
-          {/* Rows, like the workshop list: meta on the left, the phase itself on the right. */}
+          {/* Rows: meta on the left, the phase itself on the right. */}
           <ul className="mt-6 border-t border-rule">
             {phases.map((phase) => (
               <li

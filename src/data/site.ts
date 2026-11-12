@@ -9,31 +9,32 @@ export const event = {
   edition: 'Fourth edition',
   season: 'Spring 2026',
   /** The month, for the hero strip: coarse, and settled long before the day is. */
-  window: 'November 2026',
-  date: 'Late November',
-  dateISO: '2026-11',
+  window: 'November 28, 2026',
+  date: 'November 28, 2026',
+  dateISO: '2026-11-28',
   venue: 'Lazaridis Hall',
   street: '64 University Ave W',
   city: 'Waterloo, Ontario',
   /** Map pin for the venue, opened from the About grid. */
   map: 'https://www.google.com/maps/place/Lazaridis+School+of+Business+and+Economics/@43.4750999,-80.5320229,17z/data=!3m1!4b1!4m6!3m5!1s0x882bf3f62c12347f:0x100f39a182234b30!8m2!3d43.475096!4d-80.529448!16s%2Fm%2F0ds44jc',
   eligibility: 'High school students',
-  teamSize: 'Teams of three to four',
-  deadline: 'TBA',
+  teamSize: 'Teams of two to four',
+  deadline: 'November 21',
+  deadlineISO: '2026-11-21',
   prizePool: '$1000+',
-  /** The interest form, linked from the apply page until registration opens. */
-  interestForm: 'https://forms.gle/79fBCguYXH8iTkDc7',
+  /** The registration form, linked from the hero and the apply page. */
+  registrationForm: 'https://forms.gle/gJGWzJwrGMUrd66v5',
 } as const
 
 /** What delegates get out of ROI, listed on the apply page. */
 export const expectations = [
   '$1,000+ in prize money',
   'Medals and awards',
-  'Workshops with LAMA',
+  'A LAMA analyst paired with your team',
+  'A beginner intro package with everything you need to learn',
   'Case studies developed and assessed by Laurier professors',
   'Networking with peers, professors, and LAMA executives',
   'Laurier campus tour',
-  'Food provided',
   'Free to enter',
 ] as const
 
@@ -44,7 +45,7 @@ export const expectations = [
  */
 export const nav = [
   { id: 'about', label: 'Home', href: '/#about' },
-  { id: 'workshops', label: 'Workshops', href: '/#workshops' },
+  { id: 'support', label: 'Support', href: '/#support' },
   { id: 'team', label: 'Team', href: '/#team' },
   { id: 'sponsor', label: 'Sponsor', href: '/sponsor.html' },
   // Hidden for now: restore this line (and the volunteer input in vite.config.ts) to bring the page back.
@@ -196,7 +197,7 @@ export const faqs = [
   },
   {
     q: 'How will the competition be judged?',
-    a: 'More information about the judging criteria and evaluation process will be revealed closer to the competition.',
+    a: 'The pitch criteria will be released on November 21.',
   },
   {
     q: 'Do I need to bring anything?',
@@ -204,7 +205,7 @@ export const faqs = [
   },
   {
     q: 'What should I wear?',
-    a: 'ROI is a formal competition, so a suit is recommended; however, business casual attire is also appropriate.',
+    a: 'Business formal attire is required.',
   },
   {
     q: 'Is transportation provided?',
@@ -212,7 +213,11 @@ export const faqs = [
   },
   {
     q: 'Will food be provided?',
-    a: 'Yes. One meal will be provided for all participants.',
+    a: 'No. Lunch is not provided, so please bring your own lunch or plan to buy it nearby.',
+  },
+  {
+    q: 'How big are teams? Can I apply on my own?',
+    a: 'Teams are two to four students. Free agents are welcome: apply on your own and we will pair you with other free agents to form a team.',
   },
 ] as const
 
@@ -221,6 +226,11 @@ export const faqs = [
  * short on purpose for now, and grows as partners sign on.
  */
 export const sponsors = [
+  {
+    name: 'Lazaridis School of Business & Economics, Wilfrid Laurier University',
+    logo: '/img/sponsors/lazaridis.png',
+    href: '',
+  },
   { name: 'Youth Capital Forum', logo: '/img/sponsors/ycf.png', href: '' },
   { name: 'Laurier Asset Management Association', logo: '/img/sponsors/LAMA.jpg', href: '' },
 ] as const

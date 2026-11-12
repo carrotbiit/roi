@@ -46,6 +46,22 @@ export function Hero() {
             Sponsor the event
           </a>
         </div>
+
+        <div
+          className="animate-rise mt-12 flex flex-col items-center gap-4"
+          style={{ animationDelay: delay.footer }}
+        >
+          <p className="font-mono text-xs tracking-[0.24em] text-fg-subtle uppercase">
+            Sponsored by
+          </p>
+          <img
+            src="/img/sponsors/lazaridis.png"
+            alt="Lazaridis School of Business & Economics, Wilfrid Laurier University"
+            width={442}
+            height={168}
+            className="h-16 w-auto md:h-20"
+          />
+        </div>
       </Container>
 
       <Container
