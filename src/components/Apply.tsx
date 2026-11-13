@@ -63,11 +63,14 @@ export function Apply() {
           </p>
           <p>
             Teams are 2–4 students. Applying on your own? Free agents are welcome and will be paired
-            with other free agents. During the competition, each team will be paired with a LAMA
-            analyst to help out and
-            given case studies developed by Laurier professors focused on a sector. Teams will
-            conduct their own research, develop an investment thesis, and ultimately present and
-            defend their ideas to a panel of Laurier professors.
+            with other free agents. Each team is paired with a LAMA analyst to help out.
+          </p>
+          <p>
+            The pitch criteria are released on November 21, and teams have one week to research and
+            build their pitch. On competition day, every team pitches to the LAMA executive team in
+            the preliminary round, and the top six teams advance to the final, pitching to Laurier
+            finance professors, including the Vice Dean of the Lazaridis School of Business &
+            Economics.
           </p>
           <p>
             Beyond the competition, ROI will provide opportunities to network with like-minded

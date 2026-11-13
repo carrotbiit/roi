@@ -32,7 +32,7 @@ export const expectations = [
   'Medals and awards',
   'A LAMA analyst paired with your team',
   'A beginner intro package with everything you need to learn',
-  'Case studies developed and assessed by Laurier professors',
+  'Finalists pitch to Laurier finance professors, including the Vice Dean of Lazaridis',
   'Networking with peers, professors, and LAMA executives',
   'Laurier campus tour',
   'Free to enter',
@@ -44,7 +44,7 @@ export const expectations = [
  */
 export const nav = [
   { id: 'about', label: 'Home', href: '/#about' },
-  { id: 'support', label: 'Support', href: '/#support' },
+  { id: 'preparation', label: 'Preparation', href: '/#preparation' },
   { id: 'team', label: 'Team', href: '/#team' },
   // Hidden for now: restore this line to put the sponsor page back in the nav.
   // { id: 'sponsor', label: 'Sponsor', href: '/sponsor.html' },
@@ -85,27 +85,27 @@ export const team: TeamMember[] = [
   },
 ]
 
-/** The three rounds of the competition day, shown as a stepped list. */
+/** The shape of the competition, shown as a stepped list. */
 export const phases = [
   {
     n: 1,
-    name: 'Preliminary Round',
-    body: 'In the morning, every team is given a case study and builds its pitch alongside a LAMA analyst. Each pitch is then presented to and reviewed by the LAMA executive team.',
+    name: 'Build your pitch',
+    body: 'The pitch criteria are released on November 21, one week before the competition. Teams spend that week researching a stock and building their pitch, with help from their LAMA analyst.',
   },
   {
     n: 2,
-    name: 'Semi-finals',
-    body: 'Advancing teams receive a new case study and repeat the process: build the pitch, then present it. This time, the pitches are reviewed by Laurier professors.',
+    name: 'Preliminary Round',
+    body: 'On competition day, every team presents its pitch to the LAMA executive team. The top six teams advance to the final.',
   },
   {
     n: 3,
-    name: 'Finals',
-    body: 'The finalists take on one last, different case study and pitch it to a panel of Laurier professors.',
+    name: 'Final',
+    body: 'The top six teams pitch to a panel of Laurier finance professors, including the Vice Dean of the Lazaridis School of Business & Economics.',
   },
 ] as const
 
-/** Shown under the format list until the details are settled. */
-export const formatNote = 'More specifics of the format will be announced closer to the date of the event.'
+/** Shown under the format list. */
+export const formatNote = 'The pitch criteria will be released on November 21.'
 
 /** Scoring rubric, published in full to registered delegates. */
 export const rubric = [

@@ -15,11 +15,11 @@ const points = [
   },
 ] as const
 
-export function Support() {
+export function Preparation() {
   return (
-    <Section id="support" labelledBy="support-heading">
-      <h2 id="support-heading" className="text-4xl md:text-5xl">
-        Support
+    <Section id="preparation" labelledBy="preparation-heading">
+      <h2 id="preparation-heading" className="text-4xl md:text-5xl">
+        How We Help You Prepare
       </h2>
 
       <ul className="mt-10 grid gap-px border border-rule bg-rule md:mt-12 md:grid-cols-2">

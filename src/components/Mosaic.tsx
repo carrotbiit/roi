@@ -97,8 +97,7 @@ function Fact({
 export function Mosaic() {
   return (
     <Section id="about" labelledBy="about-heading">
-      <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
-      <header className="max-w-2xl lg:col-span-7">
+      <header className="max-w-2xl">
         <h2 id="about-heading" className="text-4xl md:text-5xl">
           About <span className="text-brand">ROI</span>
         </h2>
@@ -112,29 +111,15 @@ export function Mosaic() {
           <strong className="font-medium text-brand">No prior experience is required:</strong> every
           team is paired with a LAMA analyst, and a beginner intro package is sent out with all the
           information needed to learn. Teams then put what they’ve learned
-          into practice through{' '}
+          into practice by building a pitch in the week before the event and presenting it to the
+          LAMA executive team. The{' '}
+          <strong className="font-medium text-brand">top six teams</strong> go on to pitch to{' '}
           <strong className="font-medium text-brand">
-            live pitches of case studies created by university professors
-          </strong>
-          , with their ideas challenged by{' '}
-          <strong className="font-medium text-brand">
-            professors
+            Laurier finance professors, including the Vice Dean of Lazaridis
           </strong>
           .
         </p>
       </header>
-
-      <figure className="lg:col-span-5">
-        <img
-          src="/img/poster.jpg"
-          alt="ROI High School Stock Pitch Competition 2026 poster: November 28th, $1000 prize pool, sponsored by the Lazaridis School of Business & Economics at Wilfrid Laurier University."
-          width={1320}
-          height={1642}
-          loading="lazy"
-          className="mx-auto w-full max-w-md border border-rule"
-        />
-      </figure>
-      </div>
 
       <div className="mt-10 md:mt-12">
         <dl className="grid gap-px border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-3">
